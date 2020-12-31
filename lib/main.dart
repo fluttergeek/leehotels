@@ -4,8 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lotel/sidebar/sidebar.dart';
-import 'blocs/navigation_bloc/navigation_bloc.dart';
+import 'package:lotel/Dashboard/Dashboard.dart';
+import 'package:lotel/NavigationBar/NavigationBar.dart';
+import 'package:lotel/CalendarSpace/CalendarSpace.dart';
+import 'package:lotel/blocs/navigation_bloc/navigation_bloc.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,33 +38,13 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: Row(
-            children: [LeftSide(), RightSide()],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class LeftSide extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(width: 200, height: double.infinity, child: SideBar());
-  }
-}
-
-var backgroundStartColor = Color(0xFFFFD500);
-var backgroundEndColor = Color(0xFFF6A00C);
-
-class RightSide extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [],
+          body: Stack(
+            children: [
+              NavigationBar(),
+              DashBoard(),
+              CalendarSpace(),
+            ],
+          ).wh(Get.width, Get.height),
         ),
       ),
     );

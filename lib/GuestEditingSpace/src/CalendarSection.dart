@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lotel/CalendarSpace/src/CalendarPellet.dart';
+import 'package:lotel/GuestEditingSpace/src/CalendarPellet.dart';
 
 class CalendarSection extends StatelessWidget {
   @override

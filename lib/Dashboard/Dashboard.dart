@@ -19,7 +19,7 @@ class DashBoard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 30.0, top: 25.0, bottom: 10.0),
+              margin: EdgeInsets.only(left: 30.0, top: 25.0),
               child: Text(
                 'Stats',
                 style: GoogleFonts.quicksand(
@@ -28,9 +28,7 @@ class DashBoard extends StatelessWidget {
                 ),
               ),
             ),
-            Tabs(),
             Container(
-              margin: EdgeInsets.only(top: 5.0),
               height: 200.0,
               width: MediaQuery.of(context).size.width * 0.62,
               child: Row(
@@ -65,6 +63,7 @@ class DashBoard extends StatelessWidget {
                   icon: Icon(
                     Icons.add_box_rounded,
                     color: Color(0xff333951),
+                    size: 18,
                   ),
                   onPressed: () {}),
             ),

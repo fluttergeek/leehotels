@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProgressCard extends StatefulWidget {
@@ -100,28 +101,25 @@ class _ProgressCardState extends State<ProgressCard> {
                     height: 13.0,
                     width: 13.0,
                     child: Icon(
-                      Icons.attach_money,
+                      MaterialCommunityIcons.currency_php,
                       size: 13.0,
                       color: hovered ? Colors.white : Colors.black,
                     ),
                   ),
                   SizedBox(
-                    width: 8.0,
+                    width: 3.0,
                   ),
                   Container(
                     child: Text(
                       widget.total,
                       style: GoogleFonts.quicksand(
                         fontWeight: FontWeight.w500,
-                        fontSize: 10.0,
+                        fontSize: widget.percentComplete == null ? 20 : 15.0,
                         color: hovered ? Colors.white : Colors.black,
                       ),
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 5.0,
               ),
               if (widget.percentComplete != null)
                 Row(

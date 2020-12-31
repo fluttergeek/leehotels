@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lotel/CalendarSpace/src/CalendarSection.dart';
-import 'package:lotel/CalendarSpace/src/MeetingsSection.dart';
-import 'package:lotel/CalendarSpace/src/TopContainer.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lotel/Widgets/LightTextField.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class CalendarSpace extends StatelessWidget {
+class GuestEditingSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -17,23 +15,23 @@ class CalendarSpace extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 30.0,
+              height: 25.0,
             ),
             // TopContainer(),
             // CalendarSection(),
             // MeetingsSection(),
-            16.heightBox,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                "New Guest"
-                    .text
-                    .xl
-                    .bold
-                    .color(Color(0xff333951))
-                    .make()
-                    .pOnly(left: 5),
-                16.heightBox,
+                Text(
+                  'New Guest',
+                  style: GoogleFonts.quicksand(
+                    color: Color(0xff333951),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ).pOnly(left: 5),
+                35.heightBox,
                 LightTextField(
                     label: 'Name',
                     prefixIcon: Icons.person,

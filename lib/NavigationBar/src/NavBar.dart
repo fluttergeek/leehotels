@@ -35,7 +35,7 @@ class _NavBarState extends State<NavBar> {
             },
           ),
           NavBarItem(
-            icon: Feather.list,
+            icon: Feather.shopping_bag,
             active: selected[1],
             touched: () {
               setState(() {
@@ -44,7 +44,7 @@ class _NavBarState extends State<NavBar> {
             },
           ),
           NavBarItem(
-            icon: Feather.folder,
+            icon: Feather.credit_card,
             active: selected[2],
             touched: () {
               setState(() {

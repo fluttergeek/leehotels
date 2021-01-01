@@ -39,7 +39,7 @@ class _RoomItemState extends State<RoomItem> {
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 275),
-        margin: EdgeInsets.only(bottom: 10.0, left: 40.0, right: 15.0),
+        margin: EdgeInsets.only(bottom: 10.0, left: 20.0, right: 15.0),
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
             color: Colors.white,

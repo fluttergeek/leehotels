@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:lotel/NavigationBar/src/NavBarItem.dart';
+part of 'package:lotel/NavigationBar/NavigationBar.dart';
 
 class NavBar extends StatefulWidget {
   @override
@@ -22,56 +20,59 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350.0,
-      child: Column(
-        children: [
-          NavBarItem(
-            icon: Feather.home,
-            active: selected[0],
-            touched: () {
-              setState(() {
-                select(0);
-              });
-            },
-          ),
-          NavBarItem(
-            icon: Feather.shopping_bag,
-            active: selected[1],
-            touched: () {
-              setState(() {
-                select(1);
-              });
-            },
-          ),
-          NavBarItem(
-            icon: Feather.credit_card,
-            active: selected[2],
-            touched: () {
-              setState(() {
-                select(2);
-              });
-            },
-          ),
-          NavBarItem(
-            icon: Feather.message_square,
-            active: selected[3],
-            touched: () {
-              setState(() {
-                select(3);
-              });
-            },
-          ),
-          NavBarItem(
-            icon: Feather.settings,
-            active: selected[4],
-            touched: () {
-              setState(() {
-                select(4);
-              });
-            },
-          ),
-        ],
-      ),
-    );
+        height: 350.0,
+        child: BlocBuilder<NavigationBloc, NavigationState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                NavBarItem(
+                  icon: Feather.home,
+                  active: selected[0],
+                  touched: () {
+                    setState(() {
+                      select(0);
+                    });
+                  },
+                ),
+                if (state.main != MainSpace.welcome) NavBarItem(
+                  icon: Feather.shopping_bag,
+                  active: selected[1],
+                  touched: () {
+                    setState(() {
+                      select(1);
+                    });
+                  },
+                ),
+                if (state.main != MainSpace.welcome) NavBarItem(
+                  icon: Feather.credit_card,
+                  active: selected[2],
+                  touched: () {
+                    setState(() {
+                      select(2);
+                    });
+                  },
+                ),
+                if (state.main != MainSpace.welcome) NavBarItem(
+                  icon: Feather.message_square,
+                  active: selected[3],
+                  touched: () {
+                    setState(() {
+                      select(3);
+                    });
+                  },
+                ),
+                if (state.main != MainSpace.welcome) NavBarItem(
+                  icon: Feather.settings,
+                  active: selected[4],
+                  touched: () {
+                    setState(() {
+                      select(4);
+                    });
+                  },
+                ),
+              ],
+            );
+          },
+        ));
   }
 }

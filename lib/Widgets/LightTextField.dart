@@ -6,26 +6,39 @@ class LightTextField extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final Color fillColor;
+  final bool enabled;
+  final TextEditingController controller;
 
   const LightTextField({
     @required this.label,
     @required this.prefixIcon,
     this.obscureText = false,
     this.fillColor,
+    this.controller,
+    this.enabled = true,
   })  : assert(label != null),
         assert(prefixIcon != null);
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      borderRadius: BorderRadius.circular(10),
       elevation: 3.0,
-      shadowColor: Colors.grey,
+      shadowColor: Colors.grey[100],
       child: TextField(
+        textAlign: TextAlign.end,
+        controller: controller,
+        enabled: enabled,
         decoration: InputDecoration(
           filled: true,
-          fillColor: fillColor,
-          contentPadding: const EdgeInsets.all(16.0),
+          fillColor: enabled == false ? Color(0xffFAAA1E) : fillColor,
           focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 0,
+              color: Colors.black.withOpacity(0.12),
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               width: 0,
               color: Colors.black.withOpacity(0.12),
@@ -38,13 +51,18 @@ class LightTextField extends StatelessWidget {
             ),
           ),
           hintText: label,
-          hintStyle: TextStyle(
-            color: Color(0xFF2D3243).withOpacity(0.5),
-            fontWeight: FontWeight.w500,
-          ),
+          hintStyle: enabled == false
+              ? TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                )
+              : TextStyle(
+                  color: Color(0xFF2D3243).withOpacity(0.5),
+                  fontWeight: FontWeight.w600,
+                ),
           prefixIcon: Icon(
             prefixIcon,
-            color: Color(0xff333951),
+            color: enabled == false ? Colors.white : Color(0xff333951),
           ),
         ),
         obscureText: obscureText,

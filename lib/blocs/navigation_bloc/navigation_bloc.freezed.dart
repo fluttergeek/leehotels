@@ -9,72 +9,41 @@ part of 'navigation_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$NavigationStateTearOff {
   const _$NavigationStateTearOff();
 
 // ignore: unused_element
-  _Initial initial() {
-    return const _Initial();
-  }
-
-// ignore: unused_element
-  _LoadInProgress loadInProgress() {
-    return const _LoadInProgress();
-  }
-
-// ignore: unused_element
-  _LoadSuccess loadSuccess() {
-    return const _LoadSuccess();
-  }
-
-// ignore: unused_element
-  _LoadFailure loadFailure() {
-    return const _LoadFailure();
+  _NavigationState call(
+      {@required MainSpace main, @required EditingSpace editing}) {
+    return _NavigationState(
+      main: main,
+      editing: editing,
+    );
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $NavigationState = _$NavigationStateTearOff();
 
+/// @nodoc
 mixin _$NavigationState {
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loadInProgress(),
-    @required Result loadSuccess(),
-    @required Result loadFailure(),
-  });
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loadInProgress(),
-    Result loadSuccess(),
-    Result loadFailure(),
-    @required Result orElse(),
-  });
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result loadInProgress(_LoadInProgress value),
-    @required Result loadSuccess(_LoadSuccess value),
-    @required Result loadFailure(_LoadFailure value),
-  });
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result loadInProgress(_LoadInProgress value),
-    Result loadSuccess(_LoadSuccess value),
-    Result loadFailure(_LoadFailure value),
-    @required Result orElse(),
-  });
+  MainSpace get main;
+  EditingSpace get editing;
+
+  $NavigationStateCopyWith<NavigationState> get copyWith;
 }
 
+/// @nodoc
 abstract class $NavigationStateCopyWith<$Res> {
   factory $NavigationStateCopyWith(
           NavigationState value, $Res Function(NavigationState) then) =
       _$NavigationStateCopyWithImpl<$Res>;
+  $Res call({MainSpace main, EditingSpace editing});
 }
 
+/// @nodoc
 class _$NavigationStateCopyWithImpl<$Res>
     implements $NavigationStateCopyWith<$Res> {
   _$NavigationStateCopyWithImpl(this._value, this._then);
@@ -82,444 +51,167 @@ class _$NavigationStateCopyWithImpl<$Res>
   final NavigationState _value;
   // ignore: unused_field
   final $Res Function(NavigationState) _then;
-}
-
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
-}
-
-class __$InitialCopyWithImpl<$Res> extends _$NavigationStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
 
   @override
-  _Initial get _value => super._value as _Initial;
-}
-
-class _$_Initial implements _Initial {
-  const _$_Initial();
-
-  @override
-  String toString() {
-    return 'NavigationState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loadInProgress(),
-    @required Result loadSuccess(),
-    @required Result loadFailure(),
+  $Res call({
+    Object main = freezed,
+    Object editing = freezed,
   }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loadInProgress(),
-    Result loadSuccess(),
-    Result loadFailure(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result loadInProgress(_LoadInProgress value),
-    @required Result loadSuccess(_LoadSuccess value),
-    @required Result loadFailure(_LoadFailure value),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result loadInProgress(_LoadInProgress value),
-    Result loadSuccess(_LoadSuccess value),
-    Result loadFailure(_LoadFailure value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
+    return _then(_value.copyWith(
+      main: main == freezed ? _value.main : main as MainSpace,
+      editing: editing == freezed ? _value.editing : editing as EditingSpace,
+    ));
   }
 }
 
-abstract class _Initial implements NavigationState {
-  const factory _Initial() = _$_Initial;
+/// @nodoc
+abstract class _$NavigationStateCopyWith<$Res>
+    implements $NavigationStateCopyWith<$Res> {
+  factory _$NavigationStateCopyWith(
+          _NavigationState value, $Res Function(_NavigationState) then) =
+      __$NavigationStateCopyWithImpl<$Res>;
+  @override
+  $Res call({MainSpace main, EditingSpace editing});
 }
 
-abstract class _$LoadInProgressCopyWith<$Res> {
-  factory _$LoadInProgressCopyWith(
-          _LoadInProgress value, $Res Function(_LoadInProgress) then) =
-      __$LoadInProgressCopyWithImpl<$Res>;
-}
-
-class __$LoadInProgressCopyWithImpl<$Res>
+/// @nodoc
+class __$NavigationStateCopyWithImpl<$Res>
     extends _$NavigationStateCopyWithImpl<$Res>
-    implements _$LoadInProgressCopyWith<$Res> {
-  __$LoadInProgressCopyWithImpl(
-      _LoadInProgress _value, $Res Function(_LoadInProgress) _then)
-      : super(_value, (v) => _then(v as _LoadInProgress));
+    implements _$NavigationStateCopyWith<$Res> {
+  __$NavigationStateCopyWithImpl(
+      _NavigationState _value, $Res Function(_NavigationState) _then)
+      : super(_value, (v) => _then(v as _NavigationState));
 
   @override
-  _LoadInProgress get _value => super._value as _LoadInProgress;
+  _NavigationState get _value => super._value as _NavigationState;
+
+  @override
+  $Res call({
+    Object main = freezed,
+    Object editing = freezed,
+  }) {
+    return _then(_NavigationState(
+      main: main == freezed ? _value.main : main as MainSpace,
+      editing: editing == freezed ? _value.editing : editing as EditingSpace,
+    ));
+  }
 }
 
-class _$_LoadInProgress implements _LoadInProgress {
-  const _$_LoadInProgress();
+/// @nodoc
+class _$_NavigationState implements _NavigationState {
+  const _$_NavigationState({@required this.main, @required this.editing})
+      : assert(main != null),
+        assert(editing != null);
+
+  @override
+  final MainSpace main;
+  @override
+  final EditingSpace editing;
 
   @override
   String toString() {
-    return 'NavigationState.loadInProgress()';
+    return 'NavigationState(main: $main, editing: $editing)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadInProgress);
+    return identical(this, other) ||
+        (other is _NavigationState &&
+            (identical(other.main, main) ||
+                const DeepCollectionEquality().equals(other.main, main)) &&
+            (identical(other.editing, editing) ||
+                const DeepCollectionEquality().equals(other.editing, editing)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(main) ^
+      const DeepCollectionEquality().hash(editing);
 
   @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loadInProgress(),
-    @required Result loadSuccess(),
-    @required Result loadFailure(),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return loadInProgress();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loadInProgress(),
-    Result loadSuccess(),
-    Result loadFailure(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadInProgress != null) {
-      return loadInProgress();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result loadInProgress(_LoadInProgress value),
-    @required Result loadSuccess(_LoadSuccess value),
-    @required Result loadFailure(_LoadFailure value),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return loadInProgress(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result loadInProgress(_LoadInProgress value),
-    Result loadSuccess(_LoadSuccess value),
-    Result loadFailure(_LoadFailure value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadInProgress != null) {
-      return loadInProgress(this);
-    }
-    return orElse();
-  }
+  _$NavigationStateCopyWith<_NavigationState> get copyWith =>
+      __$NavigationStateCopyWithImpl<_NavigationState>(this, _$identity);
 }
 
-abstract class _LoadInProgress implements NavigationState {
-  const factory _LoadInProgress() = _$_LoadInProgress;
+abstract class _NavigationState implements NavigationState {
+  const factory _NavigationState(
+      {@required MainSpace main,
+      @required EditingSpace editing}) = _$_NavigationState;
+
+  @override
+  MainSpace get main;
+  @override
+  EditingSpace get editing;
+  @override
+  _$NavigationStateCopyWith<_NavigationState> get copyWith;
 }
 
-abstract class _$LoadSuccessCopyWith<$Res> {
-  factory _$LoadSuccessCopyWith(
-          _LoadSuccess value, $Res Function(_LoadSuccess) then) =
-      __$LoadSuccessCopyWithImpl<$Res>;
-}
-
-class __$LoadSuccessCopyWithImpl<$Res>
-    extends _$NavigationStateCopyWithImpl<$Res>
-    implements _$LoadSuccessCopyWith<$Res> {
-  __$LoadSuccessCopyWithImpl(
-      _LoadSuccess _value, $Res Function(_LoadSuccess) _then)
-      : super(_value, (v) => _then(v as _LoadSuccess));
-
-  @override
-  _LoadSuccess get _value => super._value as _LoadSuccess;
-}
-
-class _$_LoadSuccess implements _LoadSuccess {
-  const _$_LoadSuccess();
-
-  @override
-  String toString() {
-    return 'NavigationState.loadSuccess()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadSuccess);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loadInProgress(),
-    @required Result loadSuccess(),
-    @required Result loadFailure(),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return loadSuccess();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loadInProgress(),
-    Result loadSuccess(),
-    Result loadFailure(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadSuccess != null) {
-      return loadSuccess();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result loadInProgress(_LoadInProgress value),
-    @required Result loadSuccess(_LoadSuccess value),
-    @required Result loadFailure(_LoadFailure value),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return loadSuccess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result loadInProgress(_LoadInProgress value),
-    Result loadSuccess(_LoadSuccess value),
-    Result loadFailure(_LoadFailure value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadSuccess != null) {
-      return loadSuccess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadSuccess implements NavigationState {
-  const factory _LoadSuccess() = _$_LoadSuccess;
-}
-
-abstract class _$LoadFailureCopyWith<$Res> {
-  factory _$LoadFailureCopyWith(
-          _LoadFailure value, $Res Function(_LoadFailure) then) =
-      __$LoadFailureCopyWithImpl<$Res>;
-}
-
-class __$LoadFailureCopyWithImpl<$Res>
-    extends _$NavigationStateCopyWithImpl<$Res>
-    implements _$LoadFailureCopyWith<$Res> {
-  __$LoadFailureCopyWithImpl(
-      _LoadFailure _value, $Res Function(_LoadFailure) _then)
-      : super(_value, (v) => _then(v as _LoadFailure));
-
-  @override
-  _LoadFailure get _value => super._value as _LoadFailure;
-}
-
-class _$_LoadFailure implements _LoadFailure {
-  const _$_LoadFailure();
-
-  @override
-  String toString() {
-    return 'NavigationState.loadFailure()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadFailure);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loadInProgress(),
-    @required Result loadSuccess(),
-    @required Result loadFailure(),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return loadFailure();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loadInProgress(),
-    Result loadSuccess(),
-    Result loadFailure(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadFailure != null) {
-      return loadFailure();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result loadInProgress(_LoadInProgress value),
-    @required Result loadSuccess(_LoadSuccess value),
-    @required Result loadFailure(_LoadFailure value),
-  }) {
-    assert(initial != null);
-    assert(loadInProgress != null);
-    assert(loadSuccess != null);
-    assert(loadFailure != null);
-    return loadFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result loadInProgress(_LoadInProgress value),
-    Result loadSuccess(_LoadSuccess value),
-    Result loadFailure(_LoadFailure value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (loadFailure != null) {
-      return loadFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadFailure implements NavigationState {
-  const factory _LoadFailure() = _$_LoadFailure;
-}
-
+/// @nodoc
 class _$NavigationEventTearOff {
   const _$NavigationEventTearOff();
 
 // ignore: unused_element
-  _Rooms rooms() {
-    return const _Rooms();
+  _GoToDashboard goToDashboard() {
+    return const _GoToDashboard();
+  }
+
+// ignore: unused_element
+  _SignIn signIn({String hotel, String password}) {
+    return _SignIn(
+      hotel: hotel,
+      password: password,
+    );
+  }
+
+// ignore: unused_element
+  _GoToWelcome signOut() {
+    return const _GoToWelcome();
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $NavigationEvent = _$NavigationEventTearOff();
 
+/// @nodoc
 mixin _$NavigationEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result rooms(),
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result rooms(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result rooms(_Rooms value),
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result rooms(_Rooms value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $NavigationEventCopyWith<$Res> {
   factory $NavigationEventCopyWith(
           NavigationEvent value, $Res Function(NavigationEvent) then) =
       _$NavigationEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$NavigationEventCopyWithImpl<$Res>
     implements $NavigationEventCopyWith<$Res> {
   _$NavigationEventCopyWithImpl(this._value, this._then);
@@ -529,31 +221,37 @@ class _$NavigationEventCopyWithImpl<$Res>
   final $Res Function(NavigationEvent) _then;
 }
 
-abstract class _$RoomsCopyWith<$Res> {
-  factory _$RoomsCopyWith(_Rooms value, $Res Function(_Rooms) then) =
-      __$RoomsCopyWithImpl<$Res>;
+/// @nodoc
+abstract class _$GoToDashboardCopyWith<$Res> {
+  factory _$GoToDashboardCopyWith(
+          _GoToDashboard value, $Res Function(_GoToDashboard) then) =
+      __$GoToDashboardCopyWithImpl<$Res>;
 }
 
-class __$RoomsCopyWithImpl<$Res> extends _$NavigationEventCopyWithImpl<$Res>
-    implements _$RoomsCopyWith<$Res> {
-  __$RoomsCopyWithImpl(_Rooms _value, $Res Function(_Rooms) _then)
-      : super(_value, (v) => _then(v as _Rooms));
+/// @nodoc
+class __$GoToDashboardCopyWithImpl<$Res>
+    extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$GoToDashboardCopyWith<$Res> {
+  __$GoToDashboardCopyWithImpl(
+      _GoToDashboard _value, $Res Function(_GoToDashboard) _then)
+      : super(_value, (v) => _then(v as _GoToDashboard));
 
   @override
-  _Rooms get _value => super._value as _Rooms;
+  _GoToDashboard get _value => super._value as _GoToDashboard;
 }
 
-class _$_Rooms implements _Rooms {
-  const _$_Rooms();
+/// @nodoc
+class _$_GoToDashboard implements _GoToDashboard {
+  const _$_GoToDashboard();
 
   @override
   String toString() {
-    return 'NavigationEvent.rooms()';
+    return 'NavigationEvent.goToDashboard()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Rooms);
+    return identical(this, other) || (other is _GoToDashboard);
   }
 
   @override
@@ -561,49 +259,286 @@ class _$_Rooms implements _Rooms {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result rooms(),
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
   }) {
-    assert(rooms != null);
-    return rooms();
+    assert(goToDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    return goToDashboard();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result rooms(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (rooms != null) {
-      return rooms();
+    if (goToDashboard != null) {
+      return goToDashboard();
     }
     return orElse();
   }
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result rooms(_Rooms value),
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
   }) {
-    assert(rooms != null);
-    return rooms(this);
+    assert(goToDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    return goToDashboard(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result rooms(_Rooms value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
-    if (rooms != null) {
-      return rooms(this);
+    if (goToDashboard != null) {
+      return goToDashboard(this);
     }
     return orElse();
   }
 }
 
-abstract class _Rooms implements NavigationEvent {
-  const factory _Rooms() = _$_Rooms;
+abstract class _GoToDashboard implements NavigationEvent {
+  const factory _GoToDashboard() = _$_GoToDashboard;
+}
+
+/// @nodoc
+abstract class _$SignInCopyWith<$Res> {
+  factory _$SignInCopyWith(_SignIn value, $Res Function(_SignIn) then) =
+      __$SignInCopyWithImpl<$Res>;
+  $Res call({String hotel, String password});
+}
+
+/// @nodoc
+class __$SignInCopyWithImpl<$Res> extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$SignInCopyWith<$Res> {
+  __$SignInCopyWithImpl(_SignIn _value, $Res Function(_SignIn) _then)
+      : super(_value, (v) => _then(v as _SignIn));
+
+  @override
+  _SignIn get _value => super._value as _SignIn;
+
+  @override
+  $Res call({
+    Object hotel = freezed,
+    Object password = freezed,
+  }) {
+    return _then(_SignIn(
+      hotel: hotel == freezed ? _value.hotel : hotel as String,
+      password: password == freezed ? _value.password : password as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_SignIn implements _SignIn {
+  const _$_SignIn({this.hotel, this.password});
+
+  @override
+  final String hotel;
+  @override
+  final String password;
+
+  @override
+  String toString() {
+    return 'NavigationEvent.signIn(hotel: $hotel, password: $password)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _SignIn &&
+            (identical(other.hotel, hotel) ||
+                const DeepCollectionEquality().equals(other.hotel, hotel)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(hotel) ^
+      const DeepCollectionEquality().hash(password);
+
+  @override
+  _$SignInCopyWith<_SignIn> get copyWith =>
+      __$SignInCopyWithImpl<_SignIn>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+  }) {
+    assert(goToDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    return signIn(hotel, password);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signIn != null) {
+      return signIn(hotel, password);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+  }) {
+    assert(goToDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    return signIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signIn != null) {
+      return signIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SignIn implements NavigationEvent {
+  const factory _SignIn({String hotel, String password}) = _$_SignIn;
+
+  String get hotel;
+  String get password;
+  _$SignInCopyWith<_SignIn> get copyWith;
+}
+
+/// @nodoc
+abstract class _$GoToWelcomeCopyWith<$Res> {
+  factory _$GoToWelcomeCopyWith(
+          _GoToWelcome value, $Res Function(_GoToWelcome) then) =
+      __$GoToWelcomeCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GoToWelcomeCopyWithImpl<$Res>
+    extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$GoToWelcomeCopyWith<$Res> {
+  __$GoToWelcomeCopyWithImpl(
+      _GoToWelcome _value, $Res Function(_GoToWelcome) _then)
+      : super(_value, (v) => _then(v as _GoToWelcome));
+
+  @override
+  _GoToWelcome get _value => super._value as _GoToWelcome;
+}
+
+/// @nodoc
+class _$_GoToWelcome implements _GoToWelcome {
+  const _$_GoToWelcome();
+
+  @override
+  String toString() {
+    return 'NavigationEvent.signOut()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _GoToWelcome);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+  }) {
+    assert(goToDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    return signOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signOut != null) {
+      return signOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+  }) {
+    assert(goToDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    return signOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (signOut != null) {
+      return signOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GoToWelcome implements NavigationEvent {
+  const factory _GoToWelcome() = _$_GoToWelcome;
 }

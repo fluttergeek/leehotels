@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lotel/Dashboard/src/ProgressCard.dart';
 import 'package:lotel/Dashboard/src/ProjectStatisticsCards.dart';
-import 'package:lotel/Dashboard/src/RoomItem.dart';
 import 'package:lotel/Dashboard/src/SubHeader.dart';
-import 'package:lotel/Dashboard/src/Tabs.dart';
+import 'package:velocity_x/velocity_x.dart';
+part 'package:lotel/Dashboard/src/RoomItem.dart';
 
 class DashBoard extends StatelessWidget {
   @override
@@ -71,7 +72,7 @@ class DashBoard extends StatelessWidget {
               color: Colors.green,
               number: '1',
               description: 'Deluxe',
-              members: '1 guest',
+              members: '0',
               duration: '2 days',
               vacancy: 'Vacant',
             ),
@@ -79,15 +80,15 @@ class DashBoard extends StatelessWidget {
               color: Colors.amber,
               description: 'Executive',
               number: '2',
-              members: '2 guest',
+              members: '2',
               duration: '4 days',
               vacancy: 'Reserved',
             ),
             RoomItem(
-              color: Colors.red,
+              color: Colors.blue,
               description: 'Standard',
               number: '3',
-              members: '4 guest',
+              members: '4',
               duration: '1 days',
               vacancy: 'Occupied',
             ),

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+part of 'package:lotel/Dashboard/Dashboard.dart';
 
 class RoomItem extends StatefulWidget {
   final String number;
@@ -94,50 +93,46 @@ class _RoomItemState extends State<RoomItem> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Text(
-                          widget.description,
-                          style: GoogleFonts.quicksand(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11.0,
-                            color: Colors.black45,
-                          ),
+                      Text(
+                        widget.description,
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11.0,
+                          color: Colors.black45,
+                        ),
+                      ).pSymmetric(h: 30),
+                      Text(
+                        widget.duration,
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11.0,
+                          color: Colors.black45,
+                        ),
+                      ).pSymmetric(h: 30),
+                      Text(
+                        widget.vacancy,
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11.0,
+                          color: Colors.black87,
+                        ),
+                      ).pSymmetric(h: 30),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Feather.settings, size: 14),
+                      ),
+                      Text(
+                        widget.members,
+                        style: GoogleFonts.quicksand(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11.0,
+                          color: Colors.black45,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Text(
-                          widget.members,
-                          style: GoogleFonts.quicksand(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11.0,
-                            color: Colors.black45,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Text(
-                          widget.duration,
-                          style: GoogleFonts.quicksand(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11.0,
-                            color: Colors.black45,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Text(
-                          widget.vacancy,
-                          style: GoogleFonts.quicksand(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11.0,
-                            color: Colors.black87,
-                          ),
-                        ),
-                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(widget.members == "0" ? Feather.user_x: Feather.user, size: 14),
+                      )
                     ],
                   ),
                 ],

@@ -23,20 +23,24 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
 
   @override
   Stream<NavigationState> mapEventToState(NavigationEvent gEvent) async* {
-    yield* gEvent.map(goToDashboard: (_GoToDashboard e) async* {
+    yield* gEvent.map(
+        // INFO DASHBOARD
+        goToDashboard: (_GoToDashboard e) async* {
       yield state.copyWith(
           main: MainSpace.dashboard, editing: EditingSpace.newGuest);
-    }, signOut: (_GoToWelcome value) async* {
-      await userRepo.signOut();
-      yield state.copyWith(
-          main: MainSpace.welcome, editing: EditingSpace.login);
-    }, signIn: (_SignIn e) async* {
+    },
+        // INFO SIGN IN
+        signIn: (_SignIn e) async* {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString("hotel", e.hotel);
       var user = await userRepo.signInUser(e.password);
-      if (user != null)
-        yield state.copyWith(
-            main: MainSpace.dashboard, editing: EditingSpace.newGuest);
+      if (user != null) this.add(NavigationEvent.goToDashboard());
+    },
+        // INFO SIGN OUT
+        signOut: (_GoToWelcome value) async* {
+      await userRepo.signOut();
+      yield state.copyWith(
+          main: MainSpace.welcome, editing: EditingSpace.login);
     });
   }
 }

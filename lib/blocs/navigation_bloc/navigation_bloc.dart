@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
 import 'package:lotel/EditingSpace/Login/UserRepository.dart';
-import 'package:lotel/MainSpace/Dashboard/repositories/RoomRepository.dart';
 import 'package:lotel/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,12 +19,13 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   NavigationBloc({
     this.userRepo,
   }) : super(NavigationState.initial()) {
-    Future.delayed(Duration(seconds: 1));
-    if (userRepo.isSignedIn()) {
-      this.add(NavigationEvent.goToDashboard());
-    } else {
-      print("not signed in");
-    }
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      if (userRepo.isSignedIn()) {
+        this.add(NavigationEvent.goToDashboard());
+      } else {
+        print("not signed in");
+      }
+    });
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:lotel/MainSpace/Dashboard/api/firestore_service.dart';
+import 'package:lotel/services/api/firestore_service.dart';
 import 'package:lotel/Widgets/SnackBars.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,7 +53,7 @@ class RoomRepo {
       @required String description,
       @required double price,
       @required int capacity}) async {
-    String id = await _firestoreService.saveRoom(
+    String id = await _firestoreService.saveNewRoom(
       capacity: capacity,
       description: description,
       number: number,

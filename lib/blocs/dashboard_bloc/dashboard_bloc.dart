@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get/get.dart';
-import 'package:lotel/MainSpace/Dashboard/repositories/RoomRepository.dart';
+import 'package:lotel/services/repositories/RoomRepository.dart';
 import 'package:lotel/blocs/navigation_bloc/navigation_bloc.dart';
 
 part 'dashboard_state.dart';

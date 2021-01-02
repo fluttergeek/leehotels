@@ -79,6 +79,7 @@ class DashBoard extends StatelessWidget {
                   ),
                 ),
                 ListView.builder(
+                  physics: BouncingScrollPhysics(),
                   itemCount: state.rooms.length,
                   itemBuilder: (context, index) {
                     return RoomItem(

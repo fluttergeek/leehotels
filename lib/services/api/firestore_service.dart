@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:lotel/Widgets/SnackBars.dart';
 import 'package:meta/meta.dart';
 
@@ -17,14 +18,14 @@ class FirestoreService {
     }
   }
 
-  Future<String> saveRoom(
+  Future<String> saveNewRoom(
       {@required String number,
       @required String description,
       @required double price,
       @required int capacity}) async {
     try {
-      DocumentReference docRef =
-          await _hotelCollectionRef.doc(hotel).collection("rooms").add(
+      String id = _hotelCollectionRef.doc().id;
+      _hotelCollectionRef.doc(hotel).collection("rooms").doc(id).set(
         {
           "number": number,
           "description": description,
@@ -36,8 +37,8 @@ class FirestoreService {
           'members': 0
         },
       );
-      await snackSuccess("Room saved!");
-      return docRef.id;
+      snackSuccess("Room saved!");
+      return id;
     } catch (e) {
       snackError(e);
       return '';
@@ -51,7 +52,7 @@ class FirestoreService {
       @required String id,
       @required int capacity}) async {
     try {
-      await _hotelCollectionRef.doc(hotel).collection("rooms").doc(id).update(
+      _hotelCollectionRef.doc(hotel).collection("rooms").doc(id).update(
         {
           "number": number,
           "description": description,
@@ -59,7 +60,7 @@ class FirestoreService {
           "capacity": capacity,
         },
       );
-      await snackSuccess("Room saved!");
+      snackSuccess("Room saved!");
       return true;
     } catch (e) {
       snackError(e);

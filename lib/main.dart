@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,7 @@ import 'package:lotel/EditingSpace/Loading.dart';
 import 'package:lotel/EditingSpace/RoomEditing/RoomEditing.dart';
 import 'package:lotel/MainSpace/Dashboard/Dashboard.dart';
 import 'package:lotel/MainSpace/Dashboard/WelcomeOnly.dart';
-import 'package:lotel/MainSpace/Dashboard/repositories/RoomRepository.dart';
+import 'package:lotel/services/repositories/RoomRepository.dart';
 import 'package:lotel/EditingSpace/GuestEditing/GuestEditing.dart';
 import 'package:lotel/EditingSpace/Login/UserRepository.dart';
 import 'package:lotel/MainSpace/Loading.dart';

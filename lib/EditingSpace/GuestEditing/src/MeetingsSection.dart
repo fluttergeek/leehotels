@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lotel/Dashboard/src/SubHeader.dart';
+import 'package:lotel/MainSpace/Dashboard/src/SubHeader.dart';
 
 class MeetingsSection extends StatelessWidget {
   @override

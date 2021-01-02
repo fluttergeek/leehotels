@@ -1,4 +1,4 @@
-part of 'package:lotel/GuestEditingSpace/GuestEditingSpace.dart';
+part of 'package:lotel/EditingSpace/GuestEditing/GuestEditing.dart';
 
 class GuestEditor extends StatelessWidget {
   const GuestEditor({
@@ -107,12 +107,10 @@ class GuestEditor extends StatelessWidget {
                     DateFormat('dd/MM/yyyy')
                         .format(args.value.endDate ?? args.value.startDate)
                         .toString();
-                print(_range);
                 if (args.value.endDate != null) {
                   int _rangeCount = args.value.endDate
                       .difference(args.value.startDate)
                       .inDays;
-                  print(_rangeCount);
                 }
               }
             },
@@ -131,6 +129,7 @@ class GuestEditor extends StatelessWidget {
           text: 'Check In',
           onPressed: () {},
         ),
+        20.heightBox
       ],
     );
   }

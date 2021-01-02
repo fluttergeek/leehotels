@@ -8,6 +8,7 @@ class LightTextField extends StatelessWidget {
   final Color fillColor;
   final bool enabled;
   final TextEditingController controller;
+  final bool numeric;
 
   const LightTextField({
     @required this.label,
@@ -15,7 +16,7 @@ class LightTextField extends StatelessWidget {
     this.obscureText = false,
     this.fillColor,
     this.controller,
-    this.enabled = true,
+    this.enabled = true, this.numeric = false,
   })  : assert(label != null),
         assert(prefixIcon != null);
 
@@ -26,6 +27,7 @@ class LightTextField extends StatelessWidget {
       elevation: 3.0,
       shadowColor: Colors.grey[100],
       child: TextField(
+        keyboardType: numeric ? TextInputType.number : TextInputType.text,
         textAlign: TextAlign.end,
         controller: controller,
         enabled: enabled,

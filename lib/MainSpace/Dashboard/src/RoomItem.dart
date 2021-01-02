@@ -1,4 +1,4 @@
-part of 'package:lotel/Dashboard/Dashboard.dart';
+part of 'package:lotel/MainSpace/Dashboard/Dashboard.dart';
 
 class RoomItem extends StatefulWidget {
   final String number;
@@ -118,7 +118,14 @@ class _RoomItemState extends State<RoomItem> {
                         ),
                       ).pSymmetric(h: 30),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context
+                              .read<NavigationBloc>()
+                              .add(NavigationEvent.editRoom());
+                          context
+                              .read<DashboardBloc>()
+                              .add(DashboardEvent.roomInFocus(widget.number));
+                        },
                         icon: Icon(Feather.settings, size: 14),
                       ),
                       Text(
@@ -130,8 +137,16 @@ class _RoomItemState extends State<RoomItem> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
-                        icon: Icon(widget.members == "0" ? Feather.user_x: Feather.user, size: 14),
+                        onPressed: () {
+                          context
+                              .read<NavigationBloc>()
+                              .add(NavigationEvent.editGuest());
+                        },
+                        icon: Icon(
+                            widget.members == "0"
+                                ? Feather.user_x
+                                : Feather.user,
+                            size: 14),
                       )
                     ],
                   ),

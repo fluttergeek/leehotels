@@ -31,7 +31,9 @@ snackBar(String title, String message) {
 
 snackError(message) {
   Flushbar(
-    message: message.toString(),
+    message: (message.contains("]"))
+        ? message.substring(message.indexOf("]") + 2)
+        : message.toString(),
     backgroundColor: Colors.red,
     icon: Icon(
       Icons.error,

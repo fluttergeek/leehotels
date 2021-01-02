@@ -14,7 +14,7 @@ class UserRepository {
           email: "lee@house.io", password: password);
       return result.user;
     } catch (e) {
-      snackError(e.toString());
+      snackError(e);
       return null;
     }
   }
@@ -23,7 +23,7 @@ class UserRepository {
     try {
       await firebaseAuth.signOut();
     } catch (e) {
-      snackError(e.toString());
+      snackError(e);
     }
   }
 

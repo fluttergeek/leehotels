@@ -13,17 +13,17 @@ import 'package:focused_menu/modals.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
-part 'package:lotel/GuestEditingSpace/src/GuestEditor.dart';
+part 'package:lotel/EditingSpace/GuestEditing/src/GuestEditor.dart';
 
 
 
-class GuestEditingSpace extends StatelessWidget {
+class GuestEditing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        color: Color(0xffF7F7FF),
+        color: editorBackground,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width * 0.28,
         child: Column(

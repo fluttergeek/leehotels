@@ -157,6 +157,11 @@ class _$NavigationEventTearOff {
   }
 
 // ignore: unused_element
+  _RefreshDashboardOnly refreshDashboard() {
+    return const _RefreshDashboardOnly();
+  }
+
+// ignore: unused_element
   _SignIn signIn({String hotel, String password}) {
     return _SignIn(
       hotel: hotel,
@@ -167,6 +172,21 @@ class _$NavigationEventTearOff {
 // ignore: unused_element
   _GoToWelcome signOut() {
     return const _GoToWelcome();
+  }
+
+// ignore: unused_element
+  _NewRoom newRoom() {
+    return const _NewRoom();
+  }
+
+// ignore: unused_element
+  _EditRoom editRoom() {
+    return const _EditRoom();
+  }
+
+// ignore: unused_element
+  _EditGuest editGuest() {
+    return const _EditGuest();
   }
 }
 
@@ -179,27 +199,43 @@ mixin _$NavigationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
     @required TResult signIn(String hotel, String password),
     @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult goToDashboard(),
+    TResult refreshDashboard(),
     TResult signIn(String hotel, String password),
     TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
     @required TResult signIn(_SignIn value),
     @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
     TResult signIn(_SignIn value),
     TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   });
 }
@@ -261,12 +297,20 @@ class _$_GoToDashboard implements _GoToDashboard {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
     @required TResult signIn(String hotel, String password),
     @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
+    assert(refreshDashboard != null);
     assert(signIn != null);
     assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
     return goToDashboard();
   }
 
@@ -274,8 +318,12 @@ class _$_GoToDashboard implements _GoToDashboard {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult goToDashboard(),
+    TResult refreshDashboard(),
     TResult signIn(String hotel, String password),
     TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -289,12 +337,20 @@ class _$_GoToDashboard implements _GoToDashboard {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
     @required TResult signIn(_SignIn value),
     @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
+    assert(refreshDashboard != null);
     assert(signIn != null);
     assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
     return goToDashboard(this);
   }
 
@@ -302,8 +358,12 @@ class _$_GoToDashboard implements _GoToDashboard {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
     TResult signIn(_SignIn value),
     TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -316,6 +376,127 @@ class _$_GoToDashboard implements _GoToDashboard {
 
 abstract class _GoToDashboard implements NavigationEvent {
   const factory _GoToDashboard() = _$_GoToDashboard;
+}
+
+/// @nodoc
+abstract class _$RefreshDashboardOnlyCopyWith<$Res> {
+  factory _$RefreshDashboardOnlyCopyWith(_RefreshDashboardOnly value,
+          $Res Function(_RefreshDashboardOnly) then) =
+      __$RefreshDashboardOnlyCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$RefreshDashboardOnlyCopyWithImpl<$Res>
+    extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$RefreshDashboardOnlyCopyWith<$Res> {
+  __$RefreshDashboardOnlyCopyWithImpl(
+      _RefreshDashboardOnly _value, $Res Function(_RefreshDashboardOnly) _then)
+      : super(_value, (v) => _then(v as _RefreshDashboardOnly));
+
+  @override
+  _RefreshDashboardOnly get _value => super._value as _RefreshDashboardOnly;
+}
+
+/// @nodoc
+class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
+  const _$_RefreshDashboardOnly();
+
+  @override
+  String toString() {
+    return 'NavigationEvent.refreshDashboard()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _RefreshDashboardOnly);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return refreshDashboard();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult refreshDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (refreshDashboard != null) {
+      return refreshDashboard();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return refreshDashboard(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (refreshDashboard != null) {
+      return refreshDashboard(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshDashboardOnly implements NavigationEvent {
+  const factory _RefreshDashboardOnly() = _$_RefreshDashboardOnly;
 }
 
 /// @nodoc
@@ -385,12 +566,20 @@ class _$_SignIn implements _SignIn {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
     @required TResult signIn(String hotel, String password),
     @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
+    assert(refreshDashboard != null);
     assert(signIn != null);
     assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
     return signIn(hotel, password);
   }
 
@@ -398,8 +587,12 @@ class _$_SignIn implements _SignIn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult goToDashboard(),
+    TResult refreshDashboard(),
     TResult signIn(String hotel, String password),
     TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -413,12 +606,20 @@ class _$_SignIn implements _SignIn {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
     @required TResult signIn(_SignIn value),
     @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
+    assert(refreshDashboard != null);
     assert(signIn != null);
     assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
     return signIn(this);
   }
 
@@ -426,8 +627,12 @@ class _$_SignIn implements _SignIn {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
     TResult signIn(_SignIn value),
     TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -486,12 +691,20 @@ class _$_GoToWelcome implements _GoToWelcome {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
     @required TResult signIn(String hotel, String password),
     @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
+    assert(refreshDashboard != null);
     assert(signIn != null);
     assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
     return signOut();
   }
 
@@ -499,8 +712,12 @@ class _$_GoToWelcome implements _GoToWelcome {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult goToDashboard(),
+    TResult refreshDashboard(),
     TResult signIn(String hotel, String password),
     TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -514,12 +731,20 @@ class _$_GoToWelcome implements _GoToWelcome {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
     @required TResult signIn(_SignIn value),
     @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
+    assert(refreshDashboard != null);
     assert(signIn != null);
     assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
     return signOut(this);
   }
 
@@ -527,8 +752,12 @@ class _$_GoToWelcome implements _GoToWelcome {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
     TResult signIn(_SignIn value),
     TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -541,4 +770,359 @@ class _$_GoToWelcome implements _GoToWelcome {
 
 abstract class _GoToWelcome implements NavigationEvent {
   const factory _GoToWelcome() = _$_GoToWelcome;
+}
+
+/// @nodoc
+abstract class _$NewRoomCopyWith<$Res> {
+  factory _$NewRoomCopyWith(_NewRoom value, $Res Function(_NewRoom) then) =
+      __$NewRoomCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$NewRoomCopyWithImpl<$Res> extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$NewRoomCopyWith<$Res> {
+  __$NewRoomCopyWithImpl(_NewRoom _value, $Res Function(_NewRoom) _then)
+      : super(_value, (v) => _then(v as _NewRoom));
+
+  @override
+  _NewRoom get _value => super._value as _NewRoom;
+}
+
+/// @nodoc
+class _$_NewRoom implements _NewRoom {
+  const _$_NewRoom();
+
+  @override
+  String toString() {
+    return 'NavigationEvent.newRoom()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _NewRoom);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return newRoom();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult refreshDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (newRoom != null) {
+      return newRoom();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return newRoom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (newRoom != null) {
+      return newRoom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NewRoom implements NavigationEvent {
+  const factory _NewRoom() = _$_NewRoom;
+}
+
+/// @nodoc
+abstract class _$EditRoomCopyWith<$Res> {
+  factory _$EditRoomCopyWith(_EditRoom value, $Res Function(_EditRoom) then) =
+      __$EditRoomCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$EditRoomCopyWithImpl<$Res> extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$EditRoomCopyWith<$Res> {
+  __$EditRoomCopyWithImpl(_EditRoom _value, $Res Function(_EditRoom) _then)
+      : super(_value, (v) => _then(v as _EditRoom));
+
+  @override
+  _EditRoom get _value => super._value as _EditRoom;
+}
+
+/// @nodoc
+class _$_EditRoom implements _EditRoom {
+  const _$_EditRoom();
+
+  @override
+  String toString() {
+    return 'NavigationEvent.editRoom()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _EditRoom);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return editRoom();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult refreshDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (editRoom != null) {
+      return editRoom();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return editRoom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (editRoom != null) {
+      return editRoom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EditRoom implements NavigationEvent {
+  const factory _EditRoom() = _$_EditRoom;
+}
+
+/// @nodoc
+abstract class _$EditGuestCopyWith<$Res> {
+  factory _$EditGuestCopyWith(
+          _EditGuest value, $Res Function(_EditGuest) then) =
+      __$EditGuestCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$EditGuestCopyWithImpl<$Res> extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$EditGuestCopyWith<$Res> {
+  __$EditGuestCopyWithImpl(_EditGuest _value, $Res Function(_EditGuest) _then)
+      : super(_value, (v) => _then(v as _EditGuest));
+
+  @override
+  _EditGuest get _value => super._value as _EditGuest;
+}
+
+/// @nodoc
+class _$_EditGuest implements _EditGuest {
+  const _$_EditGuest();
+
+  @override
+  String toString() {
+    return 'NavigationEvent.editGuest()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _EditGuest);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult editGuest(),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return editGuest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult refreshDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult editGuest(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (editGuest != null) {
+      return editGuest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult editGuest(_EditGuest value),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(editGuest != null);
+    return editGuest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult editGuest(_EditGuest value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (editGuest != null) {
+      return editGuest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EditGuest implements NavigationEvent {
+  const factory _EditGuest() = _$_EditGuest;
 }

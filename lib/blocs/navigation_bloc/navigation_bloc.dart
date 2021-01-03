@@ -19,7 +19,7 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   NavigationBloc({
     this.userRepo,
   }) : super(NavigationState.initial()) {
-    Future.delayed(Duration(seconds: 5)).then((_) {
+    Future.delayed(Duration(seconds: 1)).then((_) {
       if (userRepo.isSignedIn()) {
         this.add(NavigationEvent.goToDashboard());
       } else {
@@ -77,6 +77,12 @@ class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
         yield state.copyWith(editing: EditingSpace.loading);
         await Future.delayed(Duration(milliseconds: 500));
         yield state.copyWith(editing: EditingSpace.editGuest);
+      },
+      // NEW GUEST
+      newGuest: (_NewGuest value) async* {
+        yield state.copyWith(editing: EditingSpace.loading);
+        await Future.delayed(Duration(milliseconds: 500));
+        yield state.copyWith(editing: EditingSpace.newGuest);
       },
     );
   }

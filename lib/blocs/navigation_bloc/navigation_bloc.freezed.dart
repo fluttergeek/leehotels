@@ -185,6 +185,11 @@ class _$NavigationEventTearOff {
   }
 
 // ignore: unused_element
+  _NewGuest newGuest() {
+    return const _NewGuest();
+  }
+
+// ignore: unused_element
   _EditGuest editGuest() {
     return const _EditGuest();
   }
@@ -204,6 +209,7 @@ mixin _$NavigationEvent {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   });
   @optionalTypeArgs
@@ -214,6 +220,7 @@ mixin _$NavigationEvent {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   });
@@ -225,6 +232,7 @@ mixin _$NavigationEvent {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   });
   @optionalTypeArgs
@@ -235,6 +243,7 @@ mixin _$NavigationEvent {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   });
@@ -302,6 +311,7 @@ class _$_GoToDashboard implements _GoToDashboard {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -310,6 +320,7 @@ class _$_GoToDashboard implements _GoToDashboard {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return goToDashboard();
   }
@@ -323,6 +334,7 @@ class _$_GoToDashboard implements _GoToDashboard {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -342,6 +354,7 @@ class _$_GoToDashboard implements _GoToDashboard {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -350,6 +363,7 @@ class _$_GoToDashboard implements _GoToDashboard {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return goToDashboard(this);
   }
@@ -363,6 +377,7 @@ class _$_GoToDashboard implements _GoToDashboard {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
@@ -423,6 +438,7 @@ class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -431,6 +447,7 @@ class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return refreshDashboard();
   }
@@ -444,6 +461,7 @@ class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -463,6 +481,7 @@ class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -471,6 +490,7 @@ class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return refreshDashboard(this);
   }
@@ -484,6 +504,7 @@ class _$_RefreshDashboardOnly implements _RefreshDashboardOnly {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
@@ -571,6 +592,7 @@ class _$_SignIn implements _SignIn {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -579,6 +601,7 @@ class _$_SignIn implements _SignIn {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return signIn(hotel, password);
   }
@@ -592,6 +615,7 @@ class _$_SignIn implements _SignIn {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -611,6 +635,7 @@ class _$_SignIn implements _SignIn {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -619,6 +644,7 @@ class _$_SignIn implements _SignIn {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return signIn(this);
   }
@@ -632,6 +658,7 @@ class _$_SignIn implements _SignIn {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
@@ -696,6 +723,7 @@ class _$_GoToWelcome implements _GoToWelcome {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -704,6 +732,7 @@ class _$_GoToWelcome implements _GoToWelcome {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return signOut();
   }
@@ -717,6 +746,7 @@ class _$_GoToWelcome implements _GoToWelcome {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -736,6 +766,7 @@ class _$_GoToWelcome implements _GoToWelcome {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -744,6 +775,7 @@ class _$_GoToWelcome implements _GoToWelcome {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return signOut(this);
   }
@@ -757,6 +789,7 @@ class _$_GoToWelcome implements _GoToWelcome {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
@@ -814,6 +847,7 @@ class _$_NewRoom implements _NewRoom {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -822,6 +856,7 @@ class _$_NewRoom implements _NewRoom {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return newRoom();
   }
@@ -835,6 +870,7 @@ class _$_NewRoom implements _NewRoom {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -854,6 +890,7 @@ class _$_NewRoom implements _NewRoom {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -862,6 +899,7 @@ class _$_NewRoom implements _NewRoom {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return newRoom(this);
   }
@@ -875,6 +913,7 @@ class _$_NewRoom implements _NewRoom {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
@@ -932,6 +971,7 @@ class _$_EditRoom implements _EditRoom {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -940,6 +980,7 @@ class _$_EditRoom implements _EditRoom {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return editRoom();
   }
@@ -953,6 +994,7 @@ class _$_EditRoom implements _EditRoom {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -972,6 +1014,7 @@ class _$_EditRoom implements _EditRoom {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -980,6 +1023,7 @@ class _$_EditRoom implements _EditRoom {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return editRoom(this);
   }
@@ -993,6 +1037,7 @@ class _$_EditRoom implements _EditRoom {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {
@@ -1006,6 +1051,130 @@ class _$_EditRoom implements _EditRoom {
 
 abstract class _EditRoom implements NavigationEvent {
   const factory _EditRoom() = _$_EditRoom;
+}
+
+/// @nodoc
+abstract class _$NewGuestCopyWith<$Res> {
+  factory _$NewGuestCopyWith(_NewGuest value, $Res Function(_NewGuest) then) =
+      __$NewGuestCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$NewGuestCopyWithImpl<$Res> extends _$NavigationEventCopyWithImpl<$Res>
+    implements _$NewGuestCopyWith<$Res> {
+  __$NewGuestCopyWithImpl(_NewGuest _value, $Res Function(_NewGuest) _then)
+      : super(_value, (v) => _then(v as _NewGuest));
+
+  @override
+  _NewGuest get _value => super._value as _NewGuest;
+}
+
+/// @nodoc
+class _$_NewGuest implements _NewGuest {
+  const _$_NewGuest();
+
+  @override
+  String toString() {
+    return 'NavigationEvent.newGuest()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _NewGuest);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult goToDashboard(),
+    @required TResult refreshDashboard(),
+    @required TResult signIn(String hotel, String password),
+    @required TResult signOut(),
+    @required TResult newRoom(),
+    @required TResult editRoom(),
+    @required TResult newGuest(),
+    @required TResult editGuest(),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(newGuest != null);
+    assert(editGuest != null);
+    return newGuest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult goToDashboard(),
+    TResult refreshDashboard(),
+    TResult signIn(String hotel, String password),
+    TResult signOut(),
+    TResult newRoom(),
+    TResult editRoom(),
+    TResult newGuest(),
+    TResult editGuest(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (newGuest != null) {
+      return newGuest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult goToDashboard(_GoToDashboard value),
+    @required TResult refreshDashboard(_RefreshDashboardOnly value),
+    @required TResult signIn(_SignIn value),
+    @required TResult signOut(_GoToWelcome value),
+    @required TResult newRoom(_NewRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
+    @required TResult editGuest(_EditGuest value),
+  }) {
+    assert(goToDashboard != null);
+    assert(refreshDashboard != null);
+    assert(signIn != null);
+    assert(signOut != null);
+    assert(newRoom != null);
+    assert(editRoom != null);
+    assert(newGuest != null);
+    assert(editGuest != null);
+    return newGuest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult goToDashboard(_GoToDashboard value),
+    TResult refreshDashboard(_RefreshDashboardOnly value),
+    TResult signIn(_SignIn value),
+    TResult signOut(_GoToWelcome value),
+    TResult newRoom(_NewRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
+    TResult editGuest(_EditGuest value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (newGuest != null) {
+      return newGuest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NewGuest implements NavigationEvent {
+  const factory _NewGuest() = _$_NewGuest;
 }
 
 /// @nodoc
@@ -1051,6 +1220,7 @@ class _$_EditGuest implements _EditGuest {
     @required TResult signOut(),
     @required TResult newRoom(),
     @required TResult editRoom(),
+    @required TResult newGuest(),
     @required TResult editGuest(),
   }) {
     assert(goToDashboard != null);
@@ -1059,6 +1229,7 @@ class _$_EditGuest implements _EditGuest {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return editGuest();
   }
@@ -1072,6 +1243,7 @@ class _$_EditGuest implements _EditGuest {
     TResult signOut(),
     TResult newRoom(),
     TResult editRoom(),
+    TResult newGuest(),
     TResult editGuest(),
     @required TResult orElse(),
   }) {
@@ -1091,6 +1263,7 @@ class _$_EditGuest implements _EditGuest {
     @required TResult signOut(_GoToWelcome value),
     @required TResult newRoom(_NewRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult newGuest(_NewGuest value),
     @required TResult editGuest(_EditGuest value),
   }) {
     assert(goToDashboard != null);
@@ -1099,6 +1272,7 @@ class _$_EditGuest implements _EditGuest {
     assert(signOut != null);
     assert(newRoom != null);
     assert(editRoom != null);
+    assert(newGuest != null);
     assert(editGuest != null);
     return editGuest(this);
   }
@@ -1112,6 +1286,7 @@ class _$_EditGuest implements _EditGuest {
     TResult signOut(_GoToWelcome value),
     TResult newRoom(_NewRoom value),
     TResult editRoom(_EditRoom value),
+    TResult newGuest(_NewGuest value),
     TResult editGuest(_EditGuest value),
     @required TResult orElse(),
   }) {

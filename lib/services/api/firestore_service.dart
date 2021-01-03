@@ -9,6 +9,7 @@ class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   CollectionReference get _hotelCollectionRef => _firestore.collection(hotel);
 
+  // INFO FETCHES
   Future<QuerySnapshot> fetchRooms() async {
     try {
       return _hotelCollectionRef.doc(hotel).collection("rooms").get();
@@ -18,6 +19,25 @@ class FirestoreService {
     }
   }
 
+  Future<QuerySnapshot> fetchGuests() async {
+    try {
+      return _hotelCollectionRef.doc(hotel).collection("guests").get();
+    } catch (e) {
+      snackError(e);
+      return null;
+    }
+  }
+
+  Future<DocumentSnapshot> fetchGuest(String id) async {
+    try {
+      return _hotelCollectionRef.doc(hotel).collection("guests").doc(id).get();
+    } catch (e) {
+      snackError(e);
+      return null;
+    }
+  }
+
+  // INFO SAVES
   Future<String> saveNewRoom(
       {@required String number,
       @required String description,
@@ -45,6 +65,41 @@ class FirestoreService {
     }
   }
 
+  Future<String> saveNewGuest(
+      {@required String name,
+      @required int duration,
+      @required String roomNumber,
+      @required DateTime from,
+      @required DateTime until,
+      @required int extraBed,
+      @required int members,
+      @required String contact,
+      @required String picture}) async {
+    try {
+      String id = _hotelCollectionRef.doc().id;
+      _hotelCollectionRef.doc(hotel).collection("guests").doc(id).set(
+        {
+          'id': id,
+          'name': name,
+          'duration': duration,
+          'roomNumber': roomNumber,
+          'from': from,
+          'until': until,
+          'extraBed': extraBed,
+          'members': members,
+          'contact': contact,
+          'picture': picture
+        },
+      );
+      snackSuccess("Guest saved!");
+      return id;
+    } catch (e) {
+      snackError(e);
+      return '';
+    }
+  }
+
+  // INFO UPDATES
   Future<bool> editRoom(
       {@required String number,
       @required String description,
@@ -61,6 +116,37 @@ class FirestoreService {
         },
       );
       snackSuccess("Room saved!");
+      return true;
+    } catch (e) {
+      snackError(e);
+      return false;
+    }
+  }
+
+  Future<bool> editGuest(
+      {@required String id,
+        @required String name,
+      @required int duration,
+      @required DateTime from,
+      @required DateTime until,
+      @required int extraBed,
+      @required int members,
+      @required String contact,
+      @required String picture,}) async {
+    try {
+      _hotelCollectionRef.doc(hotel).collection("guests").doc(id).update(
+        {
+          'name': name,
+          'duration': duration,
+          'from': from,
+          'until': until,
+          'extraBed': extraBed,
+          'members': members,
+          'contact': contact,
+          'picture': picture
+        },
+      );
+      snackSuccess("Guest saved!");
       return true;
     } catch (e) {
       snackError(e);

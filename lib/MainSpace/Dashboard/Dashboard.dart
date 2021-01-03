@@ -90,6 +90,7 @@ class DashBoard extends StatelessWidget {
                       duration: state.rooms[index]['duration'].toString(),
                       vacancy:
                           state.rooms[index]['vacancy'] ? "Vacant" : "Occupied",
+                      guestID: state.rooms[index]['guestID'],
                     );
                   },
                 ).h(300),

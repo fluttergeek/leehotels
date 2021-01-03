@@ -7,6 +7,7 @@ class RoomItem extends StatefulWidget {
   final String description;
   final String duration;
   final String vacancy;
+  final String guestID;
 
   RoomItem({
     this.color,
@@ -15,6 +16,7 @@ class RoomItem extends StatefulWidget {
     this.members,
     this.number,
     this.description,
+    this.guestID,
   });
 
   @override
@@ -139,8 +141,18 @@ class _RoomItemState extends State<RoomItem> {
                       IconButton(
                         onPressed: () {
                           context
-                              .read<NavigationBloc>()
-                              .add(NavigationEvent.editGuest());
+                              .read<DashboardBloc>()
+                              .add(DashboardEvent.guestInFocus(widget.guestID)); // Guest ID is empty for new guest
+                          context.read<DashboardBloc>().add(
+                              DashboardEvent.roomInFocus(widget
+                                  .number)); // To account for room capacity
+                          widget.vacancy == 'Vacant'
+                              ? context
+                                  .read<NavigationBloc>()
+                                  .add(NavigationEvent.newGuest())
+                              : context
+                                  .read<NavigationBloc>()
+                                  .add(NavigationEvent.editGuest());
                         },
                         icon: Icon(
                             widget.members == "0"

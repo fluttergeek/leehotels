@@ -10,5 +10,6 @@ abstract class NavigationEvent with _$NavigationEvent {
   // INFO CHANGE EDITING SPACE
   const factory NavigationEvent.newRoom() = _NewRoom;
   const factory NavigationEvent.editRoom() = _EditRoom;
+  const factory NavigationEvent.newGuest() = _NewGuest;
   const factory NavigationEvent.editGuest() = _EditGuest;
 }

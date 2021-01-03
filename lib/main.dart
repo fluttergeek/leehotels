@@ -8,6 +8,7 @@ import 'package:lotel/EditingSpace/Loading.dart';
 import 'package:lotel/EditingSpace/RoomEditing/RoomEditing.dart';
 import 'package:lotel/MainSpace/Dashboard/Dashboard.dart';
 import 'package:lotel/MainSpace/Dashboard/WelcomeOnly.dart';
+import 'package:lotel/services/repositories/GuestRepository.dart';
 import 'package:lotel/services/repositories/RoomRepository.dart';
 import 'package:lotel/EditingSpace/GuestEditing/GuestEditing.dart';
 import 'package:lotel/EditingSpace/Login/UserRepository.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
                 NavigationBloc(userRepo: UserRepository())),
         BlocProvider<DashboardBloc>(
             create: (BuildContext context) =>
-                DashboardBloc(roomRepo: RoomRepo())),
+                DashboardBloc(roomRepo: RoomRepo(), guestRepo:GuestRepo())),
       ],
       child: GetMaterialApp(
         opaqueRoute: false,
@@ -67,9 +68,10 @@ class MyApp extends StatelessWidget {
                   else if (EditingSpace.loading == state.editing)
                     LoadingMain(),
                   // INFO EDITING SPACE
-                  if (state.editing == EditingSpace.newGuest ||
-                      state.editing == EditingSpace.editGuest)
-                    GuestEditing()
+                  if (state.editing == EditingSpace.newGuest)
+                    GuestEditing(Mode.add)
+                  else if (state.editing == EditingSpace.editGuest)
+                    GuestEditing(Mode.edit)
                   else if (EditingSpace.login == state.editing)
                     Login()
                   else if (EditingSpace.newRoom == state.editing)

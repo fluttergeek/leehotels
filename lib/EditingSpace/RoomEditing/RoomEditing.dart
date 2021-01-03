@@ -3,7 +3,6 @@ import 'package:lotel/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:lotel/constants.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:lotel/Widgets/LightButton.dart';
 import 'package:lotel/Widgets/LightTextField.dart';
 import 'package:lotel/Widgets/RoundedRectangularSlider.dart';

@@ -96,8 +96,9 @@ class DashBoard extends StatelessWidget {
                 ).h(300),
                 SubHeader(title: 'Project Statistics', trailing: Container()),
                 ProjectStatisticsCards(),
+                20.heightBox
               ],
-            );
+            ).scrollVertical(physics: BouncingScrollPhysics());
           },
         ),
       ),

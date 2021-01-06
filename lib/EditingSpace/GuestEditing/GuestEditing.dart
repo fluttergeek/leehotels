@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lotel/Widgets/SnackBars.dart';
 import 'package:lotel/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:lotel/constants.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';

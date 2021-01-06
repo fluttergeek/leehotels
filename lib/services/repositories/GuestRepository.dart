@@ -1,12 +1,14 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lotel/services/api/firestorage_service.dart';
 import 'package:lotel/services/api/firestore_service.dart';
 import 'package:lotel/Widgets/SnackBars.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class GuestRepo {
   factory GuestRepo() => _guestRepo;
@@ -129,7 +131,11 @@ class GuestRepo {
       return null;
   }
 
-  Future<String> uploadPicture(PickedFile file) async {
-    return await _firestorageService.uploadPicture(file: file);
+  Future<Uint8List> uploadPicture(PickedFile file) async {
+    http.Response response = await http.get(
+      await _firestorageService.uploadPicture(file: file),
+    );
+
+    return response.bodyBytes;
   }
 }

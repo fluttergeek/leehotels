@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +15,8 @@ part 'dashboard_bloc.freezed.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   RoomRepo roomRepo;
   GuestRepo guestRepo;
-  DashboardBloc({this.roomRepo, this.guestRepo}) : super(DashboardState.initial()) {
+  DashboardBloc({this.roomRepo, this.guestRepo})
+      : super(DashboardState.initial()) {
     Future.delayed(Duration(seconds: 1));
     this.add(DashboardEvent.fetchRooms());
   }
@@ -106,7 +106,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       deleteUnsavedPicture: (_DeleteUnsavedPicture value) async* {},
       uploadPicture: (_UploadPicture e) async* {
         Map<String, dynamic> _guest = state.guestInFocus;
-        _guest['picture'] = guestRepo.uploadPicture(e.file);
+        yield state.copyWith(guestInFocus: null);
+        _guest['picture'] = await guestRepo.uploadPicture(e.file);
         yield state.copyWith(guestInFocus: _guest);
       },
     );

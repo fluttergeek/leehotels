@@ -58,59 +58,66 @@ class _GuestEditorState extends State<GuestEditor> {
         16.heightBox,
         BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: Color(0xff6C6CE5), width: 3),
-              ),
-              child: state.guestInFocus['picture'].isNotEmpty
-                  ? CachedNetworkImage(imageUrl: state.guestInFocus['picture'])
-                  : SizedBox(
-                      width: 40,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FocusedMenuHolder(
-                            menuBoxDecoration: BoxDecoration(
-                                color: Colors.grey[100],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0))),
-                            duration: Duration(milliseconds: 100),
-                            animateMenuItems: true,
-                            blurBackgroundColor: Colors.black54,
-                            bottomOffsetHeight: 100,
-                            openWithTap: true,
-                            onPressed: () {},
-                            child: Icon(
-                              Feather.image,
-                              size: 40,
-                              color: lightPurple,
-                            ),
-                            menuItems: [
-                              FocusedMenuItem(
-                                  title: Text("Choose File"),
-                                  trailingIcon: Icon(Icons.file_upload),
-                                  onPressed: () async {
-                                    final picker = ImagePicker();
+            if (state.guestInFocus == null)
+              return Center(child: CircularProgressIndicator()).h(150);
+            else if (state.guestInFocus['picture'].isNotEmpty)
+              return Image.memory(state.guestInFocus['picture'],
+                      fit: BoxFit.fill)
+                  .centered()
+                  .wh(double.infinity, 150);
+            else
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: Color(0xff6C6CE5), width: 3),
+                ),
+                child: SizedBox(
+                  width: 40,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FocusedMenuHolder(
+                        menuBoxDecoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0))),
+                        duration: Duration(milliseconds: 100),
+                        animateMenuItems: true,
+                        blurBackgroundColor: Colors.black54,
+                        bottomOffsetHeight: 100,
+                        openWithTap: true,
+                        onPressed: () {},
+                        child: Icon(
+                          Feather.image,
+                          size: 40,
+                          color: lightPurple,
+                        ),
+                        menuItems: [
+                          FocusedMenuItem(
+                              title: Text("Choose File"),
+                              trailingIcon: Icon(Icons.file_upload),
+                              onPressed: () async {
+                                final picker = ImagePicker();
 
-                                    final PickedFile image = await picker
-                                        .getImage(source: ImageSource.gallery);
-                                    context.read<DashboardBloc>().add(
-                                        DashboardEvent.uploadPicture(
-                                            image));
-                                  }),
-                              FocusedMenuItem(
-                                  title: Text("Webcam"),
-                                  trailingIcon: Icon(Icons.camera),
-                                  onPressed: () {}),
-                            ],
-                          ),
-                          15.heightBox,
-                          "Guest Valid ID".text.color(lightPurple).make()
+                                final PickedFile image = await picker.getImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 50);
+                                context
+                                    .read<DashboardBloc>()
+                                    .add(DashboardEvent.uploadPicture(image));
+                              }),
+                          FocusedMenuItem(
+                              title: Text("Webcam"),
+                              trailingIcon: Icon(Icons.camera),
+                              onPressed: () {}),
                         ],
                       ),
-                    ),
-            ).wh(double.infinity, 150);
+                      15.heightBox,
+                      "Guest Valid ID".text.color(lightPurple).make()
+                    ],
+                  ),
+                ),
+              ).wh(double.infinity, 150);
           },
         ),
         16.heightBox,
@@ -125,14 +132,14 @@ class _GuestEditorState extends State<GuestEditor> {
             fullWidth: true,
             min: 1,
             max: capacity,
-            onChanged: (val) => print(val)),
+            onChanged: (val) => setState(() => members = val)),
         16.heightBox,
         RoundedRectangularSlider(
             icon: MaterialCommunityIcons.bed_empty,
             fullWidth: true,
             min: 0,
             max: capacity - 1,
-            onChanged: (val) => print(val)),
+            onChanged: (val) => setState(() => extraBed = val)),
         16.heightBox,
         LightTextField(
             label: '1',
@@ -150,14 +157,15 @@ class _GuestEditorState extends State<GuestEditor> {
             minDate: from,
             onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
               if (args.value is PickerDateRange) {
-                from = args.value.startDate;
-                until = args.value.endDate;
-
-                if (args.value.endDate != null) {
-                  duration = args.value.endDate
-                      .difference(args.value.startDate)
-                      .inDays;
-                }
+                setState(() {
+                  from = args.value.startDate;
+                  until = args.value.endDate;
+                  if (args.value.endDate != null) {
+                    duration = args.value.endDate
+                        .difference(args.value.startDate)
+                        .inDays;
+                  }
+                });
               }
             },
             selectionMode: DateRangePickerSelectionMode.range,

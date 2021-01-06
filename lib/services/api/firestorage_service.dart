@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -13,20 +13,21 @@ class FirestorageService {
   final FirebaseStorage _firestorage = FirebaseStorage.instance;
 
   Future<String> uploadPicture({@required PickedFile file}) async {
-    String url;
     try {
-      Uint8List bytes = await file.readAsBytes();
+      Reference ref = _firestorage
+          .ref()
+          .child("guestIDs/${DateTime.now().millisecondsSinceEpoch}.jpg");
 
-      Reference ref =
-          _firestorage.ref().child("guestIDs/${DateTime.now()}.$extension");
-
-      UploadTask uploadTask =
-          ref.putData(bytes, SettableMetadata(contentType: 'image/png'));
+      UploadTask uploadTask = ref.putData(
+          await file.readAsBytes(),
+          SettableMetadata(
+              contentType: 'image/jpeg',
+              customMetadata: {'picked-file-path': file.path}));
       TaskSnapshot taskSnapshot = await uploadTask
           .whenComplete(() => snackSuccess("ID uploaded!"))
           .catchError((onError) => snackError(onError.toString()));
 
-      String url = taskSnapshot.toString();
+      String url = await taskSnapshot.ref.getDownloadURL();
 
       return url;
     } catch (e) {
@@ -43,10 +44,10 @@ class FirestorageService {
     }
   }
 
-  Future<File> compressingPhoto(File file) async {
-    ImD.Image mImageFile = ImD.decodeImage(file.readAsBytesSync());
-    final compressedImageFile = file
-      ..writeAsBytesSync(ImD.encodeJpg(mImageFile, quality: 90));
-    return compressedImageFile;
-  }
+  // Future<File> compressingPhoto(File file) async {
+  //   ImD.Image mImageFile = ImD.decodeImage(file.readAsBytesSync());
+  //   final compressedImageFile = file
+  //     ..writeAsBytesSync(ImD.encodeJpg(mImageFile, quality: 90));
+  //   return compressedImageFile;
+  // }
 }

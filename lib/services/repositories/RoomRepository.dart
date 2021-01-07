@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:lotel/services/api/firestore_service.dart';
 import 'package:lotel/Widgets/SnackBars.dart';
+import 'package:lotel/services/api/room_hive.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,7 @@ class RoomRepo {
 
   static final RoomRepo _roomRepo = RoomRepo._intertnal();
   FirestoreService _firestoreService;
+  RoomHive _hive;
 
   RoomRepo._intertnal() {
     SharedPreferences.getInstance().then((prefs) {
@@ -18,6 +20,7 @@ class RoomRepo {
       else
         snackError("No hotel selected. Please log out and login again.");
     });
+    _hive = RoomHive();
   }
 
   List<Map<String, dynamic>> rooms = [];
@@ -95,5 +98,21 @@ class RoomRepo {
       return existingMap;
     } else
       return null;
+  }
+
+  Future updateGuest(
+      {@required String roomID,
+        @required String guestID, @required Map<String, dynamic> map}) async {
+    String id = await _firestoreService.saveGuestToRoom(
+      roomID: roomID,
+      guestID: guestID,
+    );
+    map['guestID'] = guestID;
+    _hive.addRoom(map);
+  }
+
+  Future deleteRoom(String id) async {
+    await _firestoreService.deleteRoom(id);
+    snackSuccess("You've deleted the room!");
   }
 }

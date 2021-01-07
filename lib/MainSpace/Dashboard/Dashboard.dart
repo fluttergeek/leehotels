@@ -8,6 +8,7 @@ import 'package:lotel/MainSpace/Dashboard/src/SubHeader.dart';
 import 'package:lotel/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:lotel/blocs/navigation_bloc/navigation_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
+
 part 'package:lotel/MainSpace/Dashboard/src/RoomItem.dart';
 
 class DashBoard extends StatelessWidget {
@@ -88,8 +89,9 @@ class DashBoard extends StatelessWidget {
                       description: state.rooms[index]['description'],
                       members: state.rooms[index]['members'].toString(),
                       duration: state.rooms[index]['duration'].toString(),
-                      vacancy:
-                          state.rooms[index]['vacancy'] ? "Vacant" : "Occupied",
+                      vacancy: state.rooms[index]['guestID'].isEmpty
+                          ? "Vacant"
+                          : "Occupied",
                       guestID: state.rooms[index]['guestID'],
                     );
                   },

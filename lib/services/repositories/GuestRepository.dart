@@ -1,17 +1,20 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lotel/services/api/firestorage_service.dart';
 import 'package:lotel/services/api/firestore_service.dart';
 import 'package:lotel/Widgets/SnackBars.dart';
+import 'package:lotel/services/api/guest_hive.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class GuestRepo {
   factory GuestRepo() => _guestRepo;
+  GuestHive _hive;
 
   static final GuestRepo _guestRepo = GuestRepo._intertnal();
   FirestoreService _firestoreService;
@@ -24,43 +27,59 @@ class GuestRepo {
       else
         snackError("No hotel selected. Please log out and login again.");
     });
+    _hive = GuestHive();
     _firestorageService = FirestorageService();
   }
 
   Map<String, dynamic> guest;
-  List<Map<String, dynamic>> guests = [];
 
   Future<Map<String, dynamic>> getGuest(String id) async {
     // If this guest already exists in the list, show the guest in the list instead
-    guest = guests.firstWhere((g) => g['id'] == id, orElse: () => null);
+    Map<String, dynamic> emptyGuest = {
+      'id': '',
+      'name': '',
+      'roomNumber': '',
+      'from': DateTime.now(),
+      'until': DateTime.now().add(Duration(days: 1)),
+      'extraBed': 0,
+      'members': 1,
+      'contact': '',
+      'picture': ''
+    };
+    if (id.isEmpty) return emptyGuest;
+    guest = _hive.fetchGuest(id);
     if (guest != null) return guest;
     // Else download it from firestore
     DocumentSnapshot _guestSnapshot = await _firestoreService.fetchGuest(id);
-    if (!_guestSnapshot.exists)
-      return null;
+    print("guest hive is null");
+    if (_guestSnapshot == null)
+      return emptyGuest;
     else {
-      Map<String, dynamic> data = _guestSnapshot.data();
-      guest = {
-        'id': id,
-        'name': data['name'],
-        'duration': data['duration'],
-        'roomNumber': data['roomNumber'],
-        'from': data['from'],
-        'until': data['until'],
-        'extraBed': data['extraBed'],
-        'members': data['members'],
-        'contact': data['contact'],
-        'picture': data['picture']
-      };
-      guests.add(guest); // because the guest is not yet in the list
+      ConnectivityResult connectivityResult =
+          await (Connectivity().checkConnectivity());
+      if (_guestSnapshot.exists) {
+        Map<String, dynamic> data = _guestSnapshot.data();
+        guest = {
+          'id': id,
+          'name': data['name'],
+          'roomNumber': data['roomNumber'],
+          'from': data['from'],
+          'until': data['until'],
+          'extraBed': data['extraBed'],
+          'members': data['members'],
+          'contact': data['contact'],
+          'picture': (connectivityResult == ConnectivityResult.none)
+              ? _hive.fetchPicture(id)
+              : data['picture']
+        };
+      } else
+        return emptyGuest;
     }
-
     return guest;
   }
 
   Future<Map<String, dynamic>> addGuest(
       {@required String name,
-      @required int duration,
       @required String roomNumber,
       @required DateTime from,
       @required DateTime until,
@@ -70,7 +89,6 @@ class GuestRepo {
       @required String picture}) async {
     String id = await _firestoreService.saveNewGuest(
       contact: contact,
-      duration: duration,
       extraBed: extraBed,
       from: from,
       members: members,
@@ -79,11 +97,10 @@ class GuestRepo {
       roomNumber: roomNumber,
       until: until,
     );
-    if (id.isEmpty) return null;
-    return {
+    print(id);
+    Map<String, dynamic> newGuest = {
       'id': id,
       'name': name,
-      'duration': duration,
       'roomNumber': roomNumber,
       'from': from,
       'until': until,
@@ -92,12 +109,13 @@ class GuestRepo {
       'contact': contact,
       'picture': picture
     };
+    _hive.addGuest(newGuest);
+    return newGuest;
   }
 
   Future<Map<String, dynamic>> editGuest(
       {@required String id,
       @required String name,
-      @required int duration,
       @required DateTime from,
       @required DateTime until,
       @required int extraBed,
@@ -105,10 +123,9 @@ class GuestRepo {
       @required String contact,
       @required String picture,
       @required Map<String, dynamic> existingMap}) async {
-    bool success = await _firestoreService.editGuest(
+    await _firestoreService.editGuest(
       id: id,
       contact: contact,
-      duration: duration,
       extraBed: extraBed,
       from: from,
       members: members,
@@ -116,26 +133,27 @@ class GuestRepo {
       picture: picture,
       until: until,
     );
-    if (success) {
-      existingMap['contact'] = contact;
-      existingMap['duration'] = duration;
-      existingMap['extraBed'] = extraBed;
-      existingMap['from'] = from;
-      existingMap['members'] = members;
-      existingMap['name'] = name;
-      existingMap['picture'] = picture;
-      existingMap['until'] = until;
-
-      return existingMap;
-    } else
-      return null;
+    existingMap['contact'] = contact;
+    existingMap['extraBed'] = extraBed;
+    existingMap['from'] = from;
+    existingMap['members'] = members;
+    existingMap['name'] = name;
+    existingMap['picture'] = picture;
+    existingMap['until'] = until;
+    _hive.addGuest(existingMap);
+    return existingMap;
   }
 
-  Future<Uint8List> uploadPicture(PickedFile file) async {
-    http.Response response = await http.get(
-      await _firestorageService.uploadPicture(file: file),
-    );
-
-    return response.bodyBytes;
+  Future<String> uploadPicture(PickedFile file, {String guestID}) async {
+    _hive.addPicture(file, guestID: guestID);
+    // check connectivity
+    // if offline, return uintlist
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      // save file to temporary db then upload it to the guest when back online
+      return null; // this will indicate file upload has failed which will resort to using the file in bloc as the "picture"
+    }
+    return await _firestorageService.uploadPicture(file: file);
   }
 }

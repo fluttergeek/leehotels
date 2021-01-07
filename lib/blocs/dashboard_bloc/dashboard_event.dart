@@ -17,20 +17,24 @@ abstract class DashboardEvent with _$DashboardEvent {
       @required double price,
       @required int capacity}) = _EditRoom;
 
+  const factory DashboardEvent.deleteRoom(
+      String id) = _DeleteRoom;
+  const factory DashboardEvent.clearGuestInRoom(
+      String number) = _ClearGuestInRoom; // get Room ID
+
   const factory DashboardEvent.addGuest({
     @required String name,
-    @required int duration,
     @required DateTime from,
     @required DateTime until,
     @required int extraBed,
     @required int members,
     @required String contact,
     @required String picture,
+    @required String roomNumber,
   }) = _AddGuest;
   const factory DashboardEvent.editGuest({
     @required String id,
     @required String name,
-    @required int duration,
     @required DateTime from,
     @required DateTime until,
     @required int extraBed,
@@ -39,10 +43,13 @@ abstract class DashboardEvent with _$DashboardEvent {
     @required String picture,
   }) = _EditGuest;
 
+
   const factory DashboardEvent.uploadPicture(PickedFile file) = _UploadPicture;
   const factory DashboardEvent.deleteUnsavedPicture(String picture) =
       _DeleteUnsavedPicture; // INFO When getting out of new guest,but guest wasn't saved
 
+  const factory DashboardEvent.roomToEdit(String roomNumber) = _RoomToEdit;
+  const factory DashboardEvent.guestToEdit({@required String roomNumber, @required String guestID}) = _GuestToEdit;
   const factory DashboardEvent.roomInFocus(String roomNumber) = _RoomInFocus;
   const factory DashboardEvent.guestInFocus(String guestID) = _GuestInFocus;
 }

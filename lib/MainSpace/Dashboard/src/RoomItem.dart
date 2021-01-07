@@ -122,11 +122,8 @@ class _RoomItemState extends State<RoomItem> {
                       IconButton(
                         onPressed: () {
                           context
-                              .read<NavigationBloc>()
-                              .add(NavigationEvent.editRoom());
-                          context
                               .read<DashboardBloc>()
-                              .add(DashboardEvent.roomInFocus(widget.number));
+                              .add(DashboardEvent.roomToEdit(widget.number));
                         },
                         icon: Icon(Feather.settings, size: 14),
                       ),
@@ -142,20 +139,11 @@ class _RoomItemState extends State<RoomItem> {
                         onPressed: () {
                           context
                               .read<DashboardBloc>()
-                              .add(DashboardEvent.guestInFocus(widget.guestID)); // Guest ID is empty for new guest
-                          context.read<DashboardBloc>().add(
-                              DashboardEvent.roomInFocus(widget
-                                  .number)); // To account for room capacity
-                          widget.vacancy == 'Vacant'
-                              ? context
-                                  .read<NavigationBloc>()
-                                  .add(NavigationEvent.newGuest())
-                              : context
-                                  .read<NavigationBloc>()
-                                  .add(NavigationEvent.editGuest());
+                              .add(DashboardEvent.guestToEdit(roomNumber: widget.number, guestID: widget.guestID, )); // Guest ID is empty for new guest
+
                         },
                         icon: Icon(
-                            widget.members == "0"
+                            widget.vacancy == 'Vacant'
                                 ? Feather.user_x
                                 : Feather.user,
                             size: 14),

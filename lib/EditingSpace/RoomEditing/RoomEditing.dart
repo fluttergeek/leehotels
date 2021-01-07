@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RoomEditing extends StatefulWidget {
   final Mode mode;
+
   RoomEditing(this.mode);
 
   @override
@@ -24,6 +25,7 @@ class RoomEditing extends StatefulWidget {
 class _RoomEditingState extends State<RoomEditing> {
   TextEditingController numControl, priceControl, descControl, capacityControl;
   String id;
+
   @override
   void initState() {
     super.initState();
@@ -116,6 +118,14 @@ class _RoomEditingState extends State<RoomEditing> {
                           );
                   },
                 ),
+                16.heightBox,
+                if (widget.mode == Mode.edit) LightButton(
+                    color: Colors.redAccent,
+                    textColor: Colors.white,
+                    text: 'Delete Room',
+                    onPressed: () {
+                      context.read<DashboardBloc>().add(DashboardEvent.deleteRoom(id));
+                    }),
                 20.heightBox
               ],
             ).pSymmetric(h: 16)

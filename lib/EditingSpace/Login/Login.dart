@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:lotel/Widgets/LightButton.dart';
 import 'package:lotel/Widgets/LightTextField.dart';
 import 'package:lotel/constants.dart';
@@ -18,6 +19,18 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   Hotels _hotel = Hotels.serenity;
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    Hive.openBox('login').then((box) {
+      if (box.get('password') != null)
+        context.read<NavigationBloc>().add(NavigationEvent.signIn(
+            hotel: hotelString(_hotel), password: box.get('password')));
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Align(

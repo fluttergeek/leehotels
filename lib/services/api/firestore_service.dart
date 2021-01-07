@@ -5,8 +5,11 @@ import 'package:meta/meta.dart';
 
 class FirestoreService {
   String hotel;
+
   FirestoreService(this.hotel);
+
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   CollectionReference get _hotelCollectionRef => _firestore.collection(hotel);
 
   // INFO FETCHES
@@ -14,7 +17,7 @@ class FirestoreService {
     try {
       return _hotelCollectionRef.doc(hotel).collection("rooms").get();
     } catch (e) {
-      snackError(e);
+      snackError(e.toString());
       return null;
     }
   }
@@ -23,7 +26,7 @@ class FirestoreService {
     try {
       return _hotelCollectionRef.doc(hotel).collection("guests").get();
     } catch (e) {
-      snackError(e);
+      snackError(e.toString());
       return null;
     }
   }
@@ -32,7 +35,7 @@ class FirestoreService {
     try {
       return _hotelCollectionRef.doc(hotel).collection("guests").doc(id).get();
     } catch (e) {
-      snackError(e);
+      snackError(e.toString());
       return null;
     }
   }
@@ -81,7 +84,6 @@ class FirestoreService {
         {
           'id': id,
           'name': name,
-          'duration': duration,
           'roomNumber': roomNumber,
           'from': from,
           'until': until,
@@ -96,6 +98,21 @@ class FirestoreService {
     } catch (e) {
       snackError(e);
       return '';
+    }
+  }
+
+  Future saveGuestToRoom({
+    @required String roomID,
+    @required String guestID,
+  }) async {
+    try {
+      _hotelCollectionRef.doc(hotel).collection("rooms").doc(roomID).update(
+        {
+          'guestID': guestID,
+        },
+      );
+    } catch (e) {
+      snackError(e.toString());
     }
   }
 
@@ -123,21 +140,20 @@ class FirestoreService {
     }
   }
 
-  Future<bool> editGuest(
-      {@required String id,
-        @required String name,
-      @required int duration,
-      @required DateTime from,
-      @required DateTime until,
-      @required int extraBed,
-      @required int members,
-      @required String contact,
-      @required String picture,}) async {
+  Future<bool> editGuest({
+    @required String id,
+    @required String name,
+    @required DateTime from,
+    @required DateTime until,
+    @required int extraBed,
+    @required int members,
+    @required String contact,
+    @required String picture,
+  }) async {
     try {
       _hotelCollectionRef.doc(hotel).collection("guests").doc(id).update(
         {
           'name': name,
-          'duration': duration,
           'from': from,
           'until': until,
           'extraBed': extraBed,
@@ -151,6 +167,16 @@ class FirestoreService {
     } catch (e) {
       snackError(e);
       return false;
+    }
+  }
+
+  // INFO deletes
+  Future deleteRoom(String id) async {
+    try {
+      _hotelCollectionRef.doc(hotel).collection("rooms").doc(id).delete();
+    } catch (e) {
+      snackError(e);
+      return null;
     }
   }
 }

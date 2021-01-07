@@ -219,24 +219,38 @@ class _$DashboardEventTearOff {
   }
 
 // ignore: unused_element
+  _DeleteRoom deleteRoom(String id) {
+    return _DeleteRoom(
+      id,
+    );
+  }
+
+// ignore: unused_element
+  _ClearGuestInRoom clearGuestInRoom(String number) {
+    return _ClearGuestInRoom(
+      number,
+    );
+  }
+
+// ignore: unused_element
   _AddGuest addGuest(
       {@required String name,
-      @required int duration,
       @required DateTime from,
       @required DateTime until,
       @required int extraBed,
       @required int members,
       @required String contact,
-      @required String picture}) {
+      @required String picture,
+      @required String roomNumber}) {
     return _AddGuest(
       name: name,
-      duration: duration,
       from: from,
       until: until,
       extraBed: extraBed,
       members: members,
       contact: contact,
       picture: picture,
+      roomNumber: roomNumber,
     );
   }
 
@@ -244,7 +258,6 @@ class _$DashboardEventTearOff {
   _EditGuest editGuest(
       {@required String id,
       @required String name,
-      @required int duration,
       @required DateTime from,
       @required DateTime until,
       @required int extraBed,
@@ -254,7 +267,6 @@ class _$DashboardEventTearOff {
     return _EditGuest(
       id: id,
       name: name,
-      duration: duration,
       from: from,
       until: until,
       extraBed: extraBed,
@@ -275,6 +287,22 @@ class _$DashboardEventTearOff {
   _DeleteUnsavedPicture deleteUnsavedPicture(String picture) {
     return _DeleteUnsavedPicture(
       picture,
+    );
+  }
+
+// ignore: unused_element
+  _RoomToEdit roomToEdit(String roomNumber) {
+    return _RoomToEdit(
+      roomNumber,
+    );
+  }
+
+// ignore: unused_element
+  _GuestToEdit guestToEdit(
+      {@required String roomNumber, @required String guestID}) {
+    return _GuestToEdit(
+      roomNumber: roomNumber,
+      guestID: guestID,
     );
   }
 
@@ -308,29 +336,25 @@ mixin _$DashboardEvent {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   });
@@ -341,20 +365,16 @@ mixin _$DashboardEvent {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -364,10 +384,14 @@ mixin _$DashboardEvent {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   });
@@ -376,10 +400,14 @@ mixin _$DashboardEvent {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -448,39 +476,39 @@ class _$_fetchRooms implements _fetchRooms {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return fetchRooms();
@@ -494,20 +522,16 @@ class _$_fetchRooms implements _fetchRooms {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -525,20 +549,28 @@ class _$_fetchRooms implements _fetchRooms {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return fetchRooms(this);
@@ -550,10 +582,14 @@ class _$_fetchRooms implements _fetchRooms {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -667,39 +703,39 @@ class _$_AddRoom implements _AddRoom {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return addRoom(number, description, price, capacity);
@@ -713,20 +749,16 @@ class _$_AddRoom implements _AddRoom {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -744,20 +776,28 @@ class _$_AddRoom implements _AddRoom {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return addRoom(this);
@@ -769,10 +809,14 @@ class _$_AddRoom implements _AddRoom {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -910,39 +954,39 @@ class _$_EditRoom implements _EditRoom {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return editRoom(number, id, description, price, capacity);
@@ -956,20 +1000,16 @@ class _$_EditRoom implements _EditRoom {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -987,20 +1027,28 @@ class _$_EditRoom implements _EditRoom {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return editRoom(this);
@@ -1012,10 +1060,14 @@ class _$_EditRoom implements _EditRoom {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -1045,18 +1097,417 @@ abstract class _EditRoom implements DashboardEvent {
 }
 
 /// @nodoc
+abstract class _$DeleteRoomCopyWith<$Res> {
+  factory _$DeleteRoomCopyWith(
+          _DeleteRoom value, $Res Function(_DeleteRoom) then) =
+      __$DeleteRoomCopyWithImpl<$Res>;
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$DeleteRoomCopyWithImpl<$Res> extends _$DashboardEventCopyWithImpl<$Res>
+    implements _$DeleteRoomCopyWith<$Res> {
+  __$DeleteRoomCopyWithImpl(
+      _DeleteRoom _value, $Res Function(_DeleteRoom) _then)
+      : super(_value, (v) => _then(v as _DeleteRoom));
+
+  @override
+  _DeleteRoom get _value => super._value as _DeleteRoom;
+
+  @override
+  $Res call({
+    Object id = freezed,
+  }) {
+    return _then(_DeleteRoom(
+      id == freezed ? _value.id : id as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_DeleteRoom implements _DeleteRoom {
+  const _$_DeleteRoom(this.id) : assert(id != null);
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.deleteRoom(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _DeleteRoom &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
+
+  @override
+  _$DeleteRoomCopyWith<_DeleteRoom> get copyWith =>
+      __$DeleteRoomCopyWithImpl<_DeleteRoom>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult fetchRooms(),
+    @required
+        TResult addRoom(
+            String number, String description, double price, int capacity),
+    @required
+        TResult editRoom(String number, String id, String description,
+            double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
+    @required
+        TResult addGuest(
+            String name,
+            DateTime from,
+            DateTime until,
+            int extraBed,
+            int members,
+            String contact,
+            String picture,
+            String roomNumber),
+    @required
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
+    @required TResult uploadPicture(PickedFile file),
+    @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
+    @required TResult roomInFocus(String roomNumber),
+    @required TResult guestInFocus(String guestID),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return deleteRoom(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult fetchRooms(),
+    TResult addRoom(
+        String number, String description, double price, int capacity),
+    TResult editRoom(String number, String id, String description, double price,
+        int capacity),
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
+        int extraBed, int members, String contact, String picture),
+    TResult uploadPicture(PickedFile file),
+    TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
+    TResult roomInFocus(String roomNumber),
+    TResult guestInFocus(String guestID),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (deleteRoom != null) {
+      return deleteRoom(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult fetchRooms(_fetchRooms value),
+    @required TResult addRoom(_AddRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
+    @required TResult addGuest(_AddGuest value),
+    @required TResult editGuest(_EditGuest value),
+    @required TResult uploadPicture(_UploadPicture value),
+    @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
+    @required TResult roomInFocus(_RoomInFocus value),
+    @required TResult guestInFocus(_GuestInFocus value),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return deleteRoom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult fetchRooms(_fetchRooms value),
+    TResult addRoom(_AddRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
+    TResult addGuest(_AddGuest value),
+    TResult editGuest(_EditGuest value),
+    TResult uploadPicture(_UploadPicture value),
+    TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
+    TResult roomInFocus(_RoomInFocus value),
+    TResult guestInFocus(_GuestInFocus value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (deleteRoom != null) {
+      return deleteRoom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteRoom implements DashboardEvent {
+  const factory _DeleteRoom(String id) = _$_DeleteRoom;
+
+  String get id;
+  _$DeleteRoomCopyWith<_DeleteRoom> get copyWith;
+}
+
+/// @nodoc
+abstract class _$ClearGuestInRoomCopyWith<$Res> {
+  factory _$ClearGuestInRoomCopyWith(
+          _ClearGuestInRoom value, $Res Function(_ClearGuestInRoom) then) =
+      __$ClearGuestInRoomCopyWithImpl<$Res>;
+  $Res call({String number});
+}
+
+/// @nodoc
+class __$ClearGuestInRoomCopyWithImpl<$Res>
+    extends _$DashboardEventCopyWithImpl<$Res>
+    implements _$ClearGuestInRoomCopyWith<$Res> {
+  __$ClearGuestInRoomCopyWithImpl(
+      _ClearGuestInRoom _value, $Res Function(_ClearGuestInRoom) _then)
+      : super(_value, (v) => _then(v as _ClearGuestInRoom));
+
+  @override
+  _ClearGuestInRoom get _value => super._value as _ClearGuestInRoom;
+
+  @override
+  $Res call({
+    Object number = freezed,
+  }) {
+    return _then(_ClearGuestInRoom(
+      number == freezed ? _value.number : number as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_ClearGuestInRoom implements _ClearGuestInRoom {
+  const _$_ClearGuestInRoom(this.number) : assert(number != null);
+
+  @override
+  final String number;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.clearGuestInRoom(number: $number)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ClearGuestInRoom &&
+            (identical(other.number, number) ||
+                const DeepCollectionEquality().equals(other.number, number)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(number);
+
+  @override
+  _$ClearGuestInRoomCopyWith<_ClearGuestInRoom> get copyWith =>
+      __$ClearGuestInRoomCopyWithImpl<_ClearGuestInRoom>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult fetchRooms(),
+    @required
+        TResult addRoom(
+            String number, String description, double price, int capacity),
+    @required
+        TResult editRoom(String number, String id, String description,
+            double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
+    @required
+        TResult addGuest(
+            String name,
+            DateTime from,
+            DateTime until,
+            int extraBed,
+            int members,
+            String contact,
+            String picture,
+            String roomNumber),
+    @required
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
+    @required TResult uploadPicture(PickedFile file),
+    @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
+    @required TResult roomInFocus(String roomNumber),
+    @required TResult guestInFocus(String guestID),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return clearGuestInRoom(number);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult fetchRooms(),
+    TResult addRoom(
+        String number, String description, double price, int capacity),
+    TResult editRoom(String number, String id, String description, double price,
+        int capacity),
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
+        int extraBed, int members, String contact, String picture),
+    TResult uploadPicture(PickedFile file),
+    TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
+    TResult roomInFocus(String roomNumber),
+    TResult guestInFocus(String guestID),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (clearGuestInRoom != null) {
+      return clearGuestInRoom(number);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult fetchRooms(_fetchRooms value),
+    @required TResult addRoom(_AddRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
+    @required TResult addGuest(_AddGuest value),
+    @required TResult editGuest(_EditGuest value),
+    @required TResult uploadPicture(_UploadPicture value),
+    @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
+    @required TResult roomInFocus(_RoomInFocus value),
+    @required TResult guestInFocus(_GuestInFocus value),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return clearGuestInRoom(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult fetchRooms(_fetchRooms value),
+    TResult addRoom(_AddRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
+    TResult addGuest(_AddGuest value),
+    TResult editGuest(_EditGuest value),
+    TResult uploadPicture(_UploadPicture value),
+    TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
+    TResult roomInFocus(_RoomInFocus value),
+    TResult guestInFocus(_GuestInFocus value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (clearGuestInRoom != null) {
+      return clearGuestInRoom(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ClearGuestInRoom implements DashboardEvent {
+  const factory _ClearGuestInRoom(String number) = _$_ClearGuestInRoom;
+
+  String get number;
+  _$ClearGuestInRoomCopyWith<_ClearGuestInRoom> get copyWith;
+}
+
+/// @nodoc
 abstract class _$AddGuestCopyWith<$Res> {
   factory _$AddGuestCopyWith(_AddGuest value, $Res Function(_AddGuest) then) =
       __$AddGuestCopyWithImpl<$Res>;
   $Res call(
       {String name,
-      int duration,
       DateTime from,
       DateTime until,
       int extraBed,
       int members,
       String contact,
-      String picture});
+      String picture,
+      String roomNumber});
 }
 
 /// @nodoc
@@ -1071,23 +1522,24 @@ class __$AddGuestCopyWithImpl<$Res> extends _$DashboardEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object name = freezed,
-    Object duration = freezed,
     Object from = freezed,
     Object until = freezed,
     Object extraBed = freezed,
     Object members = freezed,
     Object contact = freezed,
     Object picture = freezed,
+    Object roomNumber = freezed,
   }) {
     return _then(_AddGuest(
       name: name == freezed ? _value.name : name as String,
-      duration: duration == freezed ? _value.duration : duration as int,
       from: from == freezed ? _value.from : from as DateTime,
       until: until == freezed ? _value.until : until as DateTime,
       extraBed: extraBed == freezed ? _value.extraBed : extraBed as int,
       members: members == freezed ? _value.members : members as int,
       contact: contact == freezed ? _value.contact : contact as String,
       picture: picture == freezed ? _value.picture : picture as String,
+      roomNumber:
+          roomNumber == freezed ? _value.roomNumber : roomNumber as String,
     ));
   }
 }
@@ -1096,26 +1548,24 @@ class __$AddGuestCopyWithImpl<$Res> extends _$DashboardEventCopyWithImpl<$Res>
 class _$_AddGuest implements _AddGuest {
   const _$_AddGuest(
       {@required this.name,
-      @required this.duration,
       @required this.from,
       @required this.until,
       @required this.extraBed,
       @required this.members,
       @required this.contact,
-      @required this.picture})
+      @required this.picture,
+      @required this.roomNumber})
       : assert(name != null),
-        assert(duration != null),
         assert(from != null),
         assert(until != null),
         assert(extraBed != null),
         assert(members != null),
         assert(contact != null),
-        assert(picture != null);
+        assert(picture != null),
+        assert(roomNumber != null);
 
   @override
   final String name;
-  @override
-  final int duration;
   @override
   final DateTime from;
   @override
@@ -1128,10 +1578,12 @@ class _$_AddGuest implements _AddGuest {
   final String contact;
   @override
   final String picture;
+  @override
+  final String roomNumber;
 
   @override
   String toString() {
-    return 'DashboardEvent.addGuest(name: $name, duration: $duration, from: $from, until: $until, extraBed: $extraBed, members: $members, contact: $contact, picture: $picture)';
+    return 'DashboardEvent.addGuest(name: $name, from: $from, until: $until, extraBed: $extraBed, members: $members, contact: $contact, picture: $picture, roomNumber: $roomNumber)';
   }
 
   @override
@@ -1140,9 +1592,6 @@ class _$_AddGuest implements _AddGuest {
         (other is _AddGuest &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.duration, duration) ||
-                const DeepCollectionEquality()
-                    .equals(other.duration, duration)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
             (identical(other.until, until) ||
@@ -1157,20 +1606,24 @@ class _$_AddGuest implements _AddGuest {
                 const DeepCollectionEquality()
                     .equals(other.contact, contact)) &&
             (identical(other.picture, picture) ||
-                const DeepCollectionEquality().equals(other.picture, picture)));
+                const DeepCollectionEquality()
+                    .equals(other.picture, picture)) &&
+            (identical(other.roomNumber, roomNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.roomNumber, roomNumber)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(until) ^
       const DeepCollectionEquality().hash(extraBed) ^
       const DeepCollectionEquality().hash(members) ^
       const DeepCollectionEquality().hash(contact) ^
-      const DeepCollectionEquality().hash(picture);
+      const DeepCollectionEquality().hash(picture) ^
+      const DeepCollectionEquality().hash(roomNumber);
 
   @override
   _$AddGuestCopyWith<_AddGuest> get copyWith =>
@@ -1186,43 +1639,43 @@ class _$_AddGuest implements _AddGuest {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return addGuest(
-        name, duration, from, until, extraBed, members, contact, picture);
+        name, from, until, extraBed, members, contact, picture, roomNumber);
   }
 
   @override
@@ -1233,20 +1686,16 @@ class _$_AddGuest implements _AddGuest {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -1254,7 +1703,7 @@ class _$_AddGuest implements _AddGuest {
     assert(orElse != null);
     if (addGuest != null) {
       return addGuest(
-          name, duration, from, until, extraBed, members, contact, picture);
+          name, from, until, extraBed, members, contact, picture, roomNumber);
     }
     return orElse();
   }
@@ -1265,20 +1714,28 @@ class _$_AddGuest implements _AddGuest {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return addGuest(this);
@@ -1290,10 +1747,14 @@ class _$_AddGuest implements _AddGuest {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -1309,22 +1770,22 @@ class _$_AddGuest implements _AddGuest {
 abstract class _AddGuest implements DashboardEvent {
   const factory _AddGuest(
       {@required String name,
-      @required int duration,
       @required DateTime from,
       @required DateTime until,
       @required int extraBed,
       @required int members,
       @required String contact,
-      @required String picture}) = _$_AddGuest;
+      @required String picture,
+      @required String roomNumber}) = _$_AddGuest;
 
   String get name;
-  int get duration;
   DateTime get from;
   DateTime get until;
   int get extraBed;
   int get members;
   String get contact;
   String get picture;
+  String get roomNumber;
   _$AddGuestCopyWith<_AddGuest> get copyWith;
 }
 
@@ -1336,7 +1797,6 @@ abstract class _$EditGuestCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      int duration,
       DateTime from,
       DateTime until,
       int extraBed,
@@ -1358,7 +1818,6 @@ class __$EditGuestCopyWithImpl<$Res> extends _$DashboardEventCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object duration = freezed,
     Object from = freezed,
     Object until = freezed,
     Object extraBed = freezed,
@@ -1369,7 +1828,6 @@ class __$EditGuestCopyWithImpl<$Res> extends _$DashboardEventCopyWithImpl<$Res>
     return _then(_EditGuest(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
-      duration: duration == freezed ? _value.duration : duration as int,
       from: from == freezed ? _value.from : from as DateTime,
       until: until == freezed ? _value.until : until as DateTime,
       extraBed: extraBed == freezed ? _value.extraBed : extraBed as int,
@@ -1385,7 +1843,6 @@ class _$_EditGuest implements _EditGuest {
   const _$_EditGuest(
       {@required this.id,
       @required this.name,
-      @required this.duration,
       @required this.from,
       @required this.until,
       @required this.extraBed,
@@ -1394,7 +1851,6 @@ class _$_EditGuest implements _EditGuest {
       @required this.picture})
       : assert(id != null),
         assert(name != null),
-        assert(duration != null),
         assert(from != null),
         assert(until != null),
         assert(extraBed != null),
@@ -1406,8 +1862,6 @@ class _$_EditGuest implements _EditGuest {
   final String id;
   @override
   final String name;
-  @override
-  final int duration;
   @override
   final DateTime from;
   @override
@@ -1423,7 +1877,7 @@ class _$_EditGuest implements _EditGuest {
 
   @override
   String toString() {
-    return 'DashboardEvent.editGuest(id: $id, name: $name, duration: $duration, from: $from, until: $until, extraBed: $extraBed, members: $members, contact: $contact, picture: $picture)';
+    return 'DashboardEvent.editGuest(id: $id, name: $name, from: $from, until: $until, extraBed: $extraBed, members: $members, contact: $contact, picture: $picture)';
   }
 
   @override
@@ -1434,9 +1888,6 @@ class _$_EditGuest implements _EditGuest {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.duration, duration) ||
-                const DeepCollectionEquality()
-                    .equals(other.duration, duration)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
             (identical(other.until, until) ||
@@ -1459,7 +1910,6 @@ class _$_EditGuest implements _EditGuest {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(until) ^
       const DeepCollectionEquality().hash(extraBed) ^
@@ -1481,43 +1931,43 @@ class _$_EditGuest implements _EditGuest {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return editGuest(
-        id, name, duration, from, until, extraBed, members, contact, picture);
+        id, name, from, until, extraBed, members, contact, picture);
   }
 
   @override
@@ -1528,20 +1978,16 @@ class _$_EditGuest implements _EditGuest {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -1549,7 +1995,7 @@ class _$_EditGuest implements _EditGuest {
     assert(orElse != null);
     if (editGuest != null) {
       return editGuest(
-          id, name, duration, from, until, extraBed, members, contact, picture);
+          id, name, from, until, extraBed, members, contact, picture);
     }
     return orElse();
   }
@@ -1560,20 +2006,28 @@ class _$_EditGuest implements _EditGuest {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return editGuest(this);
@@ -1585,10 +2039,14 @@ class _$_EditGuest implements _EditGuest {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -1605,7 +2063,6 @@ abstract class _EditGuest implements DashboardEvent {
   const factory _EditGuest(
       {@required String id,
       @required String name,
-      @required int duration,
       @required DateTime from,
       @required DateTime until,
       @required int extraBed,
@@ -1615,7 +2072,6 @@ abstract class _EditGuest implements DashboardEvent {
 
   String get id;
   String get name;
-  int get duration;
   DateTime get from;
   DateTime get until;
   int get extraBed;
@@ -1692,39 +2148,39 @@ class _$_UploadPicture implements _UploadPicture {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return uploadPicture(file);
@@ -1738,20 +2194,16 @@ class _$_UploadPicture implements _UploadPicture {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -1769,20 +2221,28 @@ class _$_UploadPicture implements _UploadPicture {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return uploadPicture(this);
@@ -1794,10 +2254,14 @@ class _$_UploadPicture implements _UploadPicture {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -1885,39 +2349,39 @@ class _$_DeleteUnsavedPicture implements _DeleteUnsavedPicture {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return deleteUnsavedPicture(picture);
@@ -1931,20 +2395,16 @@ class _$_DeleteUnsavedPicture implements _DeleteUnsavedPicture {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -1962,20 +2422,28 @@ class _$_DeleteUnsavedPicture implements _DeleteUnsavedPicture {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return deleteUnsavedPicture(this);
@@ -1987,10 +2455,14 @@ class _$_DeleteUnsavedPicture implements _DeleteUnsavedPicture {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -2008,6 +2480,420 @@ abstract class _DeleteUnsavedPicture implements DashboardEvent {
 
   String get picture;
   _$DeleteUnsavedPictureCopyWith<_DeleteUnsavedPicture> get copyWith;
+}
+
+/// @nodoc
+abstract class _$RoomToEditCopyWith<$Res> {
+  factory _$RoomToEditCopyWith(
+          _RoomToEdit value, $Res Function(_RoomToEdit) then) =
+      __$RoomToEditCopyWithImpl<$Res>;
+  $Res call({String roomNumber});
+}
+
+/// @nodoc
+class __$RoomToEditCopyWithImpl<$Res> extends _$DashboardEventCopyWithImpl<$Res>
+    implements _$RoomToEditCopyWith<$Res> {
+  __$RoomToEditCopyWithImpl(
+      _RoomToEdit _value, $Res Function(_RoomToEdit) _then)
+      : super(_value, (v) => _then(v as _RoomToEdit));
+
+  @override
+  _RoomToEdit get _value => super._value as _RoomToEdit;
+
+  @override
+  $Res call({
+    Object roomNumber = freezed,
+  }) {
+    return _then(_RoomToEdit(
+      roomNumber == freezed ? _value.roomNumber : roomNumber as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_RoomToEdit implements _RoomToEdit {
+  const _$_RoomToEdit(this.roomNumber) : assert(roomNumber != null);
+
+  @override
+  final String roomNumber;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.roomToEdit(roomNumber: $roomNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _RoomToEdit &&
+            (identical(other.roomNumber, roomNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.roomNumber, roomNumber)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(roomNumber);
+
+  @override
+  _$RoomToEditCopyWith<_RoomToEdit> get copyWith =>
+      __$RoomToEditCopyWithImpl<_RoomToEdit>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult fetchRooms(),
+    @required
+        TResult addRoom(
+            String number, String description, double price, int capacity),
+    @required
+        TResult editRoom(String number, String id, String description,
+            double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
+    @required
+        TResult addGuest(
+            String name,
+            DateTime from,
+            DateTime until,
+            int extraBed,
+            int members,
+            String contact,
+            String picture,
+            String roomNumber),
+    @required
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
+    @required TResult uploadPicture(PickedFile file),
+    @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
+    @required TResult roomInFocus(String roomNumber),
+    @required TResult guestInFocus(String guestID),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return roomToEdit(roomNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult fetchRooms(),
+    TResult addRoom(
+        String number, String description, double price, int capacity),
+    TResult editRoom(String number, String id, String description, double price,
+        int capacity),
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
+        int extraBed, int members, String contact, String picture),
+    TResult uploadPicture(PickedFile file),
+    TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
+    TResult roomInFocus(String roomNumber),
+    TResult guestInFocus(String guestID),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (roomToEdit != null) {
+      return roomToEdit(roomNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult fetchRooms(_fetchRooms value),
+    @required TResult addRoom(_AddRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
+    @required TResult addGuest(_AddGuest value),
+    @required TResult editGuest(_EditGuest value),
+    @required TResult uploadPicture(_UploadPicture value),
+    @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
+    @required TResult roomInFocus(_RoomInFocus value),
+    @required TResult guestInFocus(_GuestInFocus value),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return roomToEdit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult fetchRooms(_fetchRooms value),
+    TResult addRoom(_AddRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
+    TResult addGuest(_AddGuest value),
+    TResult editGuest(_EditGuest value),
+    TResult uploadPicture(_UploadPicture value),
+    TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
+    TResult roomInFocus(_RoomInFocus value),
+    TResult guestInFocus(_GuestInFocus value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (roomToEdit != null) {
+      return roomToEdit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RoomToEdit implements DashboardEvent {
+  const factory _RoomToEdit(String roomNumber) = _$_RoomToEdit;
+
+  String get roomNumber;
+  _$RoomToEditCopyWith<_RoomToEdit> get copyWith;
+}
+
+/// @nodoc
+abstract class _$GuestToEditCopyWith<$Res> {
+  factory _$GuestToEditCopyWith(
+          _GuestToEdit value, $Res Function(_GuestToEdit) then) =
+      __$GuestToEditCopyWithImpl<$Res>;
+  $Res call({String roomNumber, String guestID});
+}
+
+/// @nodoc
+class __$GuestToEditCopyWithImpl<$Res>
+    extends _$DashboardEventCopyWithImpl<$Res>
+    implements _$GuestToEditCopyWith<$Res> {
+  __$GuestToEditCopyWithImpl(
+      _GuestToEdit _value, $Res Function(_GuestToEdit) _then)
+      : super(_value, (v) => _then(v as _GuestToEdit));
+
+  @override
+  _GuestToEdit get _value => super._value as _GuestToEdit;
+
+  @override
+  $Res call({
+    Object roomNumber = freezed,
+    Object guestID = freezed,
+  }) {
+    return _then(_GuestToEdit(
+      roomNumber:
+          roomNumber == freezed ? _value.roomNumber : roomNumber as String,
+      guestID: guestID == freezed ? _value.guestID : guestID as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_GuestToEdit implements _GuestToEdit {
+  const _$_GuestToEdit({@required this.roomNumber, @required this.guestID})
+      : assert(roomNumber != null),
+        assert(guestID != null);
+
+  @override
+  final String roomNumber;
+  @override
+  final String guestID;
+
+  @override
+  String toString() {
+    return 'DashboardEvent.guestToEdit(roomNumber: $roomNumber, guestID: $guestID)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GuestToEdit &&
+            (identical(other.roomNumber, roomNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.roomNumber, roomNumber)) &&
+            (identical(other.guestID, guestID) ||
+                const DeepCollectionEquality().equals(other.guestID, guestID)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(roomNumber) ^
+      const DeepCollectionEquality().hash(guestID);
+
+  @override
+  _$GuestToEditCopyWith<_GuestToEdit> get copyWith =>
+      __$GuestToEditCopyWithImpl<_GuestToEdit>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult fetchRooms(),
+    @required
+        TResult addRoom(
+            String number, String description, double price, int capacity),
+    @required
+        TResult editRoom(String number, String id, String description,
+            double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
+    @required
+        TResult addGuest(
+            String name,
+            DateTime from,
+            DateTime until,
+            int extraBed,
+            int members,
+            String contact,
+            String picture,
+            String roomNumber),
+    @required
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
+    @required TResult uploadPicture(PickedFile file),
+    @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
+    @required TResult roomInFocus(String roomNumber),
+    @required TResult guestInFocus(String guestID),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return guestToEdit(roomNumber, guestID);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult fetchRooms(),
+    TResult addRoom(
+        String number, String description, double price, int capacity),
+    TResult editRoom(String number, String id, String description, double price,
+        int capacity),
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
+        int extraBed, int members, String contact, String picture),
+    TResult uploadPicture(PickedFile file),
+    TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
+    TResult roomInFocus(String roomNumber),
+    TResult guestInFocus(String guestID),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (guestToEdit != null) {
+      return guestToEdit(roomNumber, guestID);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult fetchRooms(_fetchRooms value),
+    @required TResult addRoom(_AddRoom value),
+    @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
+    @required TResult addGuest(_AddGuest value),
+    @required TResult editGuest(_EditGuest value),
+    @required TResult uploadPicture(_UploadPicture value),
+    @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
+    @required TResult roomInFocus(_RoomInFocus value),
+    @required TResult guestInFocus(_GuestInFocus value),
+  }) {
+    assert(fetchRooms != null);
+    assert(addRoom != null);
+    assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
+    assert(addGuest != null);
+    assert(editGuest != null);
+    assert(uploadPicture != null);
+    assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
+    assert(roomInFocus != null);
+    assert(guestInFocus != null);
+    return guestToEdit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult fetchRooms(_fetchRooms value),
+    TResult addRoom(_AddRoom value),
+    TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
+    TResult addGuest(_AddGuest value),
+    TResult editGuest(_EditGuest value),
+    TResult uploadPicture(_UploadPicture value),
+    TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
+    TResult roomInFocus(_RoomInFocus value),
+    TResult guestInFocus(_GuestInFocus value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (guestToEdit != null) {
+      return guestToEdit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GuestToEdit implements DashboardEvent {
+  const factory _GuestToEdit(
+      {@required String roomNumber, @required String guestID}) = _$_GuestToEdit;
+
+  String get roomNumber;
+  String get guestID;
+  _$GuestToEditCopyWith<_GuestToEdit> get copyWith;
 }
 
 /// @nodoc
@@ -2078,39 +2964,39 @@ class _$_RoomInFocus implements _RoomInFocus {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return roomInFocus(roomNumber);
@@ -2124,20 +3010,16 @@ class _$_RoomInFocus implements _RoomInFocus {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -2155,20 +3037,28 @@ class _$_RoomInFocus implements _RoomInFocus {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return roomInFocus(this);
@@ -2180,10 +3070,14 @@ class _$_RoomInFocus implements _RoomInFocus {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),
@@ -2270,39 +3164,39 @@ class _$_GuestInFocus implements _GuestInFocus {
     @required
         TResult editRoom(String number, String id, String description,
             double price, int capacity),
+    @required TResult deleteRoom(String id),
+    @required TResult clearGuestInRoom(String number),
     @required
         TResult addGuest(
             String name,
-            int duration,
             DateTime from,
             DateTime until,
             int extraBed,
             int members,
             String contact,
-            String picture),
+            String picture,
+            String roomNumber),
     @required
-        TResult editGuest(
-            String id,
-            String name,
-            int duration,
-            DateTime from,
-            DateTime until,
-            int extraBed,
-            int members,
-            String contact,
-            String picture),
+        TResult editGuest(String id, String name, DateTime from, DateTime until,
+            int extraBed, int members, String contact, String picture),
     @required TResult uploadPicture(PickedFile file),
     @required TResult deleteUnsavedPicture(String picture),
+    @required TResult roomToEdit(String roomNumber),
+    @required TResult guestToEdit(String roomNumber, String guestID),
     @required TResult roomInFocus(String roomNumber),
     @required TResult guestInFocus(String guestID),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return guestInFocus(guestID);
@@ -2316,20 +3210,16 @@ class _$_GuestInFocus implements _GuestInFocus {
         String number, String description, double price, int capacity),
     TResult editRoom(String number, String id, String description, double price,
         int capacity),
-    TResult addGuest(String name, int duration, DateTime from, DateTime until,
+    TResult deleteRoom(String id),
+    TResult clearGuestInRoom(String number),
+    TResult addGuest(String name, DateTime from, DateTime until, int extraBed,
+        int members, String contact, String picture, String roomNumber),
+    TResult editGuest(String id, String name, DateTime from, DateTime until,
         int extraBed, int members, String contact, String picture),
-    TResult editGuest(
-        String id,
-        String name,
-        int duration,
-        DateTime from,
-        DateTime until,
-        int extraBed,
-        int members,
-        String contact,
-        String picture),
     TResult uploadPicture(PickedFile file),
     TResult deleteUnsavedPicture(String picture),
+    TResult roomToEdit(String roomNumber),
+    TResult guestToEdit(String roomNumber, String guestID),
     TResult roomInFocus(String roomNumber),
     TResult guestInFocus(String guestID),
     @required TResult orElse(),
@@ -2347,20 +3237,28 @@ class _$_GuestInFocus implements _GuestInFocus {
     @required TResult fetchRooms(_fetchRooms value),
     @required TResult addRoom(_AddRoom value),
     @required TResult editRoom(_EditRoom value),
+    @required TResult deleteRoom(_DeleteRoom value),
+    @required TResult clearGuestInRoom(_ClearGuestInRoom value),
     @required TResult addGuest(_AddGuest value),
     @required TResult editGuest(_EditGuest value),
     @required TResult uploadPicture(_UploadPicture value),
     @required TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    @required TResult roomToEdit(_RoomToEdit value),
+    @required TResult guestToEdit(_GuestToEdit value),
     @required TResult roomInFocus(_RoomInFocus value),
     @required TResult guestInFocus(_GuestInFocus value),
   }) {
     assert(fetchRooms != null);
     assert(addRoom != null);
     assert(editRoom != null);
+    assert(deleteRoom != null);
+    assert(clearGuestInRoom != null);
     assert(addGuest != null);
     assert(editGuest != null);
     assert(uploadPicture != null);
     assert(deleteUnsavedPicture != null);
+    assert(roomToEdit != null);
+    assert(guestToEdit != null);
     assert(roomInFocus != null);
     assert(guestInFocus != null);
     return guestInFocus(this);
@@ -2372,10 +3270,14 @@ class _$_GuestInFocus implements _GuestInFocus {
     TResult fetchRooms(_fetchRooms value),
     TResult addRoom(_AddRoom value),
     TResult editRoom(_EditRoom value),
+    TResult deleteRoom(_DeleteRoom value),
+    TResult clearGuestInRoom(_ClearGuestInRoom value),
     TResult addGuest(_AddGuest value),
     TResult editGuest(_EditGuest value),
     TResult uploadPicture(_UploadPicture value),
     TResult deleteUnsavedPicture(_DeleteUnsavedPicture value),
+    TResult roomToEdit(_RoomToEdit value),
+    TResult guestToEdit(_GuestToEdit value),
     TResult roomInFocus(_RoomInFocus value),
     TResult guestInFocus(_GuestInFocus value),
     @required TResult orElse(),

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lotel/Widgets/SnackBars.dart';
@@ -16,6 +19,7 @@ import 'package:focused_menu/modals.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 part 'package:lotel/EditingSpace/GuestEditing/src/GuestEditor.dart';
 

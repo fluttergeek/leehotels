@@ -2,6 +2,7 @@ part of 'package:lotel/EditingSpace/GuestEditing/GuestEditing.dart';
 
 class GuestEditor extends StatefulWidget {
   final Mode mode;
+
   const GuestEditor({
     Key key,
     this.mode,
@@ -12,10 +13,10 @@ class GuestEditor extends StatefulWidget {
 }
 
 class _GuestEditorState extends State<GuestEditor> {
-  TextEditingController nameControl, contactControl, roomControl;
+  TextEditingController nameControl, contactControl, roomControl, chargeControl;
   String id, picture;
   DateTime from, until;
-  int extraBed, members, duration, capacity;
+  int extraBed, members, capacity;
   bool saved = false;
 
   @override
@@ -25,13 +26,14 @@ class _GuestEditorState extends State<GuestEditor> {
     if (widget.mode == Mode.edit) id = state.guestInFocus['id'];
     nameControl = TextEditingController(text: state.guestInFocus['name']);
     contactControl = TextEditingController(text: state.guestInFocus['contact']);
-    roomControl = TextEditingController(text: state.guestInFocus['roomNumber']);
+    roomControl = TextEditingController(text: state.roomInFocus['number']);
+    if (widget.mode == Mode.edit)
+      chargeControl = TextEditingController(text: '');
     from = state.guestInFocus['from'];
     until = state.guestInFocus['until'];
     extraBed = state.guestInFocus['extraBed'];
     members = state.guestInFocus['members'];
     picture = state.guestInFocus['picture'];
-    duration = until.difference(from).inDays;
     capacity = state.roomInFocus['capacity'];
   }
 
@@ -60,64 +62,24 @@ class _GuestEditorState extends State<GuestEditor> {
           builder: (context, state) {
             if (state.guestInFocus == null)
               return Center(child: CircularProgressIndicator()).h(150);
-            else if (state.guestInFocus['picture'].isNotEmpty)
-              return Image.memory(state.guestInFocus['picture'],
-                      fit: BoxFit.fill)
-                  .centered()
-                  .wh(double.infinity, 150);
-            else
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Color(0xff6C6CE5), width: 3),
-                ),
-                child: SizedBox(
-                  width: 40,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FocusedMenuHolder(
-                        menuBoxDecoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                        duration: Duration(milliseconds: 100),
-                        animateMenuItems: true,
-                        blurBackgroundColor: Colors.black54,
-                        bottomOffsetHeight: 100,
-                        openWithTap: true,
-                        onPressed: () {},
-                        child: Icon(
-                          Feather.image,
-                          size: 40,
-                          color: lightPurple,
-                        ),
-                        menuItems: [
-                          FocusedMenuItem(
-                              title: Text("Choose File"),
-                              trailingIcon: Icon(Icons.file_upload),
-                              onPressed: () async {
-                                final picker = ImagePicker();
-
-                                final PickedFile image = await picker.getImage(
-                                    source: ImageSource.gallery,
-                                    imageQuality: 50);
-                                context
-                                    .read<DashboardBloc>()
-                                    .add(DashboardEvent.uploadPicture(image));
-                              }),
-                          FocusedMenuItem(
-                              title: Text("Webcam"),
-                              trailingIcon: Icon(Icons.camera),
-                              onPressed: () {}),
-                        ],
-                      ),
-                      15.heightBox,
-                      "Guest Valid ID".text.color(lightPurple).make()
-                    ],
-                  ),
-                ),
-              ).wh(double.infinity, 150);
+            else if (state.guestInFocus['picture'].isNotEmpty) {
+              // check connectivity
+              // if online
+              return FutureBuilder(
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot != ConnectivityResult.none) {
+                      return DisplayImageFromURL(state);
+                    } else {
+                      return Image.memory(state.guestInFocus['picture'],
+                              fit: BoxFit.fill)
+                          .centered()
+                          .wh(double.infinity, 150);
+                    }
+                  },
+                  future: Connectivity().checkConnectivity());
+            } else
+              return PickImage(context).wh(double.infinity, 150);
           },
         ),
         16.heightBox,
@@ -148,29 +110,7 @@ class _GuestEditorState extends State<GuestEditor> {
             prefixIcon: Icons.meeting_room,
             fillColor: Colors.white),
         16.heightBox,
-        Material(
-          borderRadius: BorderRadius.circular(10),
-          elevation: 3.0,
-          shadowColor: Colors.grey[100],
-          child: SfDateRangePicker(
-            initialSelectedRange: PickerDateRange(from, until),
-            minDate: from,
-            onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-              if (args.value is PickerDateRange) {
-                setState(() {
-                  from = args.value.startDate;
-                  until = args.value.endDate;
-                  if (args.value.endDate != null) {
-                    duration = args.value.endDate
-                        .difference(args.value.startDate)
-                        .inDays;
-                  }
-                });
-              }
-            },
-            selectionMode: DateRangePickerSelectionMode.range,
-          ),
-        ),
+        DateRangePicker(),
         16.heightBox,
         LightTextField(
             label: 'Cellphone Number',
@@ -178,45 +118,159 @@ class _GuestEditorState extends State<GuestEditor> {
             prefixIcon: Icons.phone,
             fillColor: Colors.white),
         16.heightBox,
-        LightButton(
-          color: purple,
-          textColor: Colors.white,
-          text: this.widget.mode == Mode.add ? 'Check In' : 'Update',
-          onPressed: () {
-            setState(() {
-              saved = true;
-            });
-            if (widget.mode == Mode.add)
-              context.read<DashboardBloc>().add(
-                    DashboardEvent.addGuest(
-                      contact: contactControl.text,
-                      duration: duration,
-                      extraBed: extraBed,
-                      from: from,
-                      members: members,
-                      name: nameControl.text,
-                      picture: picture,
-                      until: until,
-                    ),
-                  );
-            else if (widget.mode == Mode.edit)
-              context.read<DashboardBloc>().add(
-                    DashboardEvent.editGuest(
-                      id: id,
-                      contact: contactControl.text,
-                      duration: duration,
-                      extraBed: extraBed,
-                      from: from,
-                      members: members,
-                      name: nameControl.text,
-                      picture: picture,
-                      until: until,
-                    ),
-                  );
-          },
-        ),
+        if (widget.mode == Mode.edit)
+          LightTextField(
+              label: 'Extra Charge',
+              controller: chargeControl,
+              prefixIcon: FontAwesome5Solid.money_check_alt,
+              fillColor: Colors.white),
+        if (widget.mode == Mode.edit) 16.heightBox,
+        ProcessButton(context),
+        if (widget.mode == Mode.edit) 16.heightBox,
+        if (widget.mode == Mode.edit)
+          LightButton(
+              color: Colors.greenAccent,
+              textColor: Colors.white,
+              text: 'Check Out',
+              onPressed: () {
+                // Clear guest in room && refreshes dashboard
+                context.read<DashboardBloc>().add(
+                      DashboardEvent.clearGuestInRoom(roomControl.text),
+                    );
+                // Add Sales
+              }),
         20.heightBox
       ],
+    );
+  }
+
+  FutureBuilder<http.Response> DisplayImageFromURL(DashboardState state) {
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        return snapshot.data == null ? Container().wh(double.infinity, 150) : Image.memory(snapshot.data.bodyBytes, fit: BoxFit.fill)
+            .centered()
+            .wh(double.infinity, 150);
+      },
+      future: http.get(
+        state.guestInFocus['picture'],
+      ),
+    );
+  }
+
+  Container PickImage(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Color(0xff6C6CE5), width: 3),
+      ),
+      child: SizedBox(
+        width: 40,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FocusedMenuHolder(
+              menuBoxDecoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              duration: Duration(milliseconds: 100),
+              animateMenuItems: true,
+              blurBackgroundColor: Colors.black54,
+              bottomOffsetHeight: 100,
+              openWithTap: true,
+              onPressed: () {},
+              child: Icon(
+                Feather.image,
+                size: 40,
+                color: lightPurple,
+              ),
+              menuItems: [
+                FocusedMenuItem(
+                    title: Text("Choose File"),
+                    trailingIcon: Icon(Icons.file_upload),
+                    onPressed: () async {
+                      final picker = ImagePicker();
+
+                      final PickedFile image = await picker.getImage(
+                          source: ImageSource.gallery, imageQuality: 50);
+                      context
+                          .read<DashboardBloc>()
+                          .add(DashboardEvent.uploadPicture(image));
+                    }),
+                FocusedMenuItem(
+                    title: Text("Webcam"),
+                    trailingIcon: Icon(Icons.camera),
+                    onPressed: () {}),
+              ],
+            ),
+            15.heightBox,
+            "Guest Valid ID".text.color(lightPurple).make()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Material DateRangePicker() {
+    return Material(
+      borderRadius: BorderRadius.circular(10),
+      elevation: 3.0,
+      shadowColor: Colors.grey[100],
+      child: SfDateRangePicker(
+        initialSelectedRange: PickerDateRange(from, until),
+        minDate: DateTime.now(),
+        onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+          if (args.value is PickerDateRange) {
+            setState(() {
+              from = args.value.startDate;
+              until = args.value.endDate;
+            });
+          }
+        },
+        selectionMode: DateRangePickerSelectionMode.range,
+      ),
+    );
+  }
+
+  LightButton ProcessButton(BuildContext context) {
+    return LightButton(
+      color: purple,
+      textColor: Colors.white,
+      text: this.widget.mode == Mode.add ? 'Check In' : 'Update',
+      onPressed: () {
+        setState(() {
+          saved = true;
+        });
+        if (contactControl.text.isNumber() && nameControl.text.isNotEmpty) {
+          if (widget.mode == Mode.add)
+            context.read<DashboardBloc>().add(
+                  DashboardEvent.addGuest(
+                    contact: contactControl.text,
+                    extraBed: extraBed,
+                    from: from,
+                    members: members,
+                    name: nameControl.text,
+                    picture: picture,
+                    until: until,
+                    roomNumber: roomControl.text,
+                  ),
+                );
+          else if (widget.mode == Mode.edit)
+            context.read<DashboardBloc>().add(
+                  DashboardEvent.editGuest(
+                    id: id,
+                    contact: contactControl.text,
+                    extraBed: extraBed,
+                    from: from,
+                    members: members,
+                    name: nameControl.text,
+                    picture: picture,
+                    until: until,
+                  ),
+                );
+        } else {
+          snackError('Missing fields!');
+        }
+      },
     );
   }
 }
